@@ -1,5 +1,4 @@
-// Copyright 2012 Square, Inc.
-package com.squareup.timessquare;
+package com.thiago.calendarvertical;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -27,6 +26,8 @@ import java.util.Formatter;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
+
+import you.thiago.calendarvert.R;
 
 import static java.util.Calendar.DATE;
 import static java.util.Calendar.DAY_OF_MONTH;
@@ -128,22 +129,22 @@ public class CalendarPickerView extends ListView {
     Resources res = context.getResources();
     TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CalendarPickerView);
     final int bg = a.getColor(R.styleable.CalendarPickerView_android_background,
-        res.getColor(R.color.calendar_bg));
-    dividerColor = a.getColor(R.styleable.CalendarPickerView_tsquare_dividerColor,
+                              res.getColor(R.color.calendar_bg));
+    dividerColor = a.getColor(R.styleable.CalendarPickerView_calendarvert_dividerColor,
         res.getColor(R.color.calendar_divider));
-    dayBackgroundResId = a.getResourceId(R.styleable.CalendarPickerView_tsquare_dayBackground,
+    dayBackgroundResId = a.getResourceId(R.styleable.CalendarPickerView_calendarvert_dayBackground,
         R.drawable.calendar_bg_selector);
-    dayTextColorResId = a.getResourceId(R.styleable.CalendarPickerView_tsquare_dayTextColor,
+    dayTextColorResId = a.getResourceId(R.styleable.CalendarPickerView_calendarvert_dayTextColor,
         R.color.calendar_text_selector);
-    titleTextStyle = a.getResourceId(R.styleable.CalendarPickerView_tsquare_titleTextStyle,
+    titleTextStyle = a.getResourceId(R.styleable.CalendarPickerView_calendarvert_titleTextStyle,
         R.style.CalendarTitle);
-    displayHeader = a.getBoolean(R.styleable.CalendarPickerView_tsquare_displayHeader, true);
-    headerTextColor = a.getColor(R.styleable.CalendarPickerView_tsquare_headerTextColor,
+    displayHeader = a.getBoolean(R.styleable.CalendarPickerView_calendarvert_displayHeader, true);
+    headerTextColor = a.getColor(R.styleable.CalendarPickerView_calendarvert_headerTextColor,
         res.getColor(R.color.calendar_text_active));
     displayDayNamesHeaderRow =
-            a.getBoolean(R.styleable.CalendarPickerView_tsquare_displayDayNamesHeaderRow, true);
+            a.getBoolean(R.styleable.CalendarPickerView_calendarvert_displayDayNamesHeaderRow, true);
     displayAlwaysDigitNumbers =
-            a.getBoolean(R.styleable.CalendarPickerView_tsquare_displayAlwaysDigitNumbers, false);
+            a.getBoolean(R.styleable.CalendarPickerView_calendarvert_displayAlwaysDigitNumbers, false);
     a.recycle();
 
     adapter = new MonthAdapter();
@@ -253,7 +254,6 @@ public class CalendarPickerView extends ListView {
           new MonthDescriptor(monthCounter.get(MONTH), monthCounter.get(YEAR),
                   date, formatMonthDate(date));
       cells.put(monthKey(month), getMonthCells(month, monthCounter));
-      Logr.d("Adding month %s", month);
       months.add(month);
       monthCounter.add(MONTH, 1);
     }
@@ -420,8 +420,6 @@ public class CalendarPickerView extends ListView {
   private void scrollToSelectedMonth(final int selectedIndex, final boolean smoothScroll) {
     post(new Runnable() {
       @Override public void run() {
-        Logr.d("Scrolling to position %d", selectedIndex);
-
         if (smoothScroll) {
           smoothScrollToPosition(selectedIndex);
         } else {
@@ -482,14 +480,12 @@ public class CalendarPickerView extends ListView {
    * {@link android.app.DialogFragment#onStart()}).
    */
   public void fixDialogDimens() {
-    Logr.d("Fixing dimensions to h = %d / w = %d", getMeasuredHeight(), getMeasuredWidth());
     // Fix the layout height/width after the dialog has been shown.
     getLayoutParams().height = getMeasuredHeight();
     getLayoutParams().width = getMeasuredWidth();
     // Post this runnable so it runs _after_ the dimen changes have been applied/re-measured.
     post(new Runnable() {
       @Override public void run() {
-        Logr.d("Dimens are fixed: now scroll to the selected date");
         scrollToSelectedDates();
       }
     });
@@ -524,7 +520,6 @@ public class CalendarPickerView extends ListView {
    * be called when the screen has been rotated and the dialog should be re-measured.
    */
   public void unfixDialogDimens() {
-    Logr.d("Reset the fixed dimensions to allow for re-measurement");
     // Fix the layout height/width after the dialog has been shown.
     getLayoutParams().height = LayoutParams.MATCH_PARENT;
     getLayoutParams().width = LayoutParams.MATCH_PARENT;
@@ -941,7 +936,6 @@ public class CalendarPickerView extends ListView {
 
     while ((cal.get(MONTH) < month.getMonth() + 1 || cal.get(YEAR) < month.getYear()) //
         && cal.get(YEAR) <= month.getYear()) {
-      Logr.d("Building week row starting at %s", cal.getTime());
       List<MonthCellDescriptor> weekCells = new ArrayList<>();
       cells.add(weekCells);
       for (int c = 0; c < 7; c++) {

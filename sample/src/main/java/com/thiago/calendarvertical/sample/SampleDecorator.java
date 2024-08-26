@@ -1,10 +1,11 @@
-package com.squareup.timessquare.sample;
+package com.thiago.calendarvertical.sample;
 
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.RelativeSizeSpan;
-import com.squareup.timessquare.CalendarCellDecorator;
-import com.squareup.timessquare.CalendarCellView;
+import com.thiago.calendarvertical.CalendarCellDecorator;
+import com.thiago.calendarvertical.CalendarCellView;
+
 import java.util.Date;
 
 public class SampleDecorator implements CalendarCellDecorator {

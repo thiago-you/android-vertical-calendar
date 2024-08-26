@@ -1,4 +1,3 @@
-<!-- Copyright 2012 Square, Inc. -->
 <resources>
   <color name="calendar_active_month_bg">#fff5f7f9</color>
   <color name="calendar_bg">#ffffffff</color>

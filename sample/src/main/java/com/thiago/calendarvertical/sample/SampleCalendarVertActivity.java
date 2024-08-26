@@ -1,4 +1,4 @@
-package com.squareup.timessquare.sample;
+package com.thiago.calendarvertical.sample;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -10,10 +10,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
-import com.squareup.timessquare.CalendarCellDecorator;
-import com.squareup.timessquare.CalendarPickerView;
-import com.squareup.timessquare.CalendarPickerView.SelectionMode;
-import com.squareup.timessquare.DefaultDayViewAdapter;
+import com.thiago.calendarvertical.CalendarCellDecorator;
+import com.thiago.calendarvertical.CalendarPickerView;
+import com.thiago.calendarvertical.DefaultDayViewAdapter;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -24,10 +24,12 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
+import you.thiago.calendarvert.sample.R;
+
 import static android.widget.Toast.LENGTH_SHORT;
 
-public class SampleTimesSquareActivity extends Activity {
-  private static final String TAG = "SampleTimesSquareActivi";
+public class SampleCalendarVertActivity extends Activity {
+  private static final String TAG = "SampleCalendarVert";
   private CalendarPickerView calendar;
   private AlertDialog theDialog;
   private CalendarPickerView dialogView;
@@ -45,8 +47,8 @@ public class SampleTimesSquareActivity extends Activity {
 
     calendar = (CalendarPickerView) findViewById(R.id.calendar_view);
     calendar.init(lastYear.getTime(), nextYear.getTime()) //
-        .inMode(SelectionMode.SINGLE) //
-        .withSelectedDate(new Date());
+            .inMode(CalendarPickerView.SelectionMode.SINGLE) //
+            .withSelectedDate(new Date());
 
     initButtonListeners(nextYear, lastYear);
   }
@@ -74,8 +76,8 @@ public class SampleTimesSquareActivity extends Activity {
         calendar.setCustomDayView(new DefaultDayViewAdapter());
         calendar.setDecorators(Collections.<CalendarCellDecorator>emptyList());
         calendar.init(lastYear.getTime(), nextYear.getTime()) //
-            .inMode(SelectionMode.SINGLE) //
-            .withSelectedDate(new Date());
+                .inMode(CalendarPickerView.SelectionMode.SINGLE) //
+                .withSelectedDate(new Date());
       }
     });
 
@@ -92,8 +94,8 @@ public class SampleTimesSquareActivity extends Activity {
         }
         calendar.setDecorators(Collections.<CalendarCellDecorator>emptyList());
         calendar.init(new Date(), nextYear.getTime()) //
-            .inMode(SelectionMode.MULTIPLE) //
-            .withSelectedDates(dates);
+                .inMode(CalendarPickerView.SelectionMode.MULTIPLE) //
+                .withSelectedDates(dates);
       }
     });
 
@@ -108,7 +110,7 @@ public class SampleTimesSquareActivity extends Activity {
         calendar.setDecorators(Collections.<CalendarCellDecorator>emptyList());
         // 20 years, enough to show performance failure.
         calendar.init(getDateWithYear(2000), getDateWithYear(2020))
-            .inMode(SelectionMode.SINGLE).withSelectedDate(c.getTime());
+                .inMode(CalendarPickerView.SelectionMode.SINGLE).withSelectedDate(c.getTime());
 
         calendar.highlightDates(getHighlightedDaysForMonth( // Adds some highlighted days
             c.get(Calendar.MONTH) - 1, c.get(Calendar.MONTH), c.get(Calendar.MONTH) + 1));
@@ -128,8 +130,8 @@ public class SampleTimesSquareActivity extends Activity {
         dates.add(today.getTime());
         calendar.setDecorators(Collections.<CalendarCellDecorator>emptyList());
         calendar.init(new Date(), nextYear.getTime()) //
-            .inMode(SelectionMode.RANGE) //
-            .withSelectedDates(dates);
+                .inMode(CalendarPickerView.SelectionMode.RANGE) //
+                .withSelectedDates(dates);
       }
     });
 
@@ -140,9 +142,9 @@ public class SampleTimesSquareActivity extends Activity {
         calendar.setCustomDayView(new DefaultDayViewAdapter());
         calendar.setDecorators(Collections.<CalendarCellDecorator>emptyList());
         calendar.init(new Date(), nextYear.getTime()) //
-            .inMode(SelectionMode.SINGLE) //
-            .withSelectedDate(new Date()) //
-            .displayOnly();
+                .inMode(CalendarPickerView.SelectionMode.SINGLE) //
+                .withSelectedDate(new Date()) //
+                .displayOnly();
       }
     });
 
@@ -169,8 +171,8 @@ public class SampleTimesSquareActivity extends Activity {
         calendar.setCustomDayView(new DefaultDayViewAdapter());
         calendar.setDecorators(Arrays.<CalendarCellDecorator>asList(new SampleDecorator()));
         calendar.init(lastYear.getTime(), nextYear.getTime()) //
-            .inMode(SelectionMode.SINGLE) //
-            .withSelectedDate(new Date());
+                .inMode(CalendarPickerView.SelectionMode.SINGLE) //
+                .withSelectedDate(new Date());
       }
     });
 
@@ -205,7 +207,7 @@ public class SampleTimesSquareActivity extends Activity {
         calendar.setDecorators(Collections.<CalendarCellDecorator>emptyList());
         calendar.setCustomDayView(new SampleDayViewAdapter());
         calendar.init(lastYear.getTime(), nextYear.getTime())
-            .inMode(SelectionMode.SINGLE)
+            .inMode(CalendarPickerView.SelectionMode.SINGLE)
             .withSelectedDate(new Date());
       }
     });
@@ -214,7 +216,7 @@ public class SampleTimesSquareActivity extends Activity {
       @Override public void onClick(View view) {
         Log.d(TAG, "Selected time in millis: " + calendar.getSelectedDate().getTime());
         String toast = "Selected: " + calendar.getSelectedDate().getTime();
-        Toast.makeText(SampleTimesSquareActivity.this, toast, LENGTH_SHORT).show();
+        Toast.makeText(SampleCalendarVertActivity.this, toast, LENGTH_SHORT).show();
       }
     });
   }

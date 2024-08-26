@@ -1,5 +1,4 @@
-// Copyright 2012 Square, Inc.
-package com.squareup.timessquare;
+package com.thiago.calendarvertical;
 
 import static androidx.core.text.TextUtilsCompat.getLayoutDirectionFromLocale;
 
@@ -14,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.core.view.ViewCompat;
+import you.thiago.calendarvert.R;
 
 import java.text.DateFormat;
 import java.text.NumberFormat;
@@ -112,7 +112,6 @@ public class MonthView extends LinearLayout {
 
   public void init(MonthDescriptor month, List<List<MonthCellDescriptor>> cells,
       boolean displayOnly, Typeface titleTypeface, Typeface dateTypeface) {
-    Logr.d("Initializing MonthView (%d) for %s", System.identityHashCode(this), month);
     long start = System.currentTimeMillis();
     title.setText(month.getLabel());
     NumberFormat numberFormatter;
@@ -166,8 +165,6 @@ public class MonthView extends LinearLayout {
     if (dateTypeface != null) {
       grid.setTypeface(dateTypeface);
     }
-
-    Logr.d("MonthView.init took %d ms", System.currentTimeMillis() - start);
   }
 
   public void setDividerColor(int color) {

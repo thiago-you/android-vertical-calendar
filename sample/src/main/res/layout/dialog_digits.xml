@@ -1,4 +1,4 @@
-<com.squareup.timessquare.CalendarPickerView
+<com.thiago.calendarvertical.CalendarPickerView
     android:id="@+id/calendar_view"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -10,5 +10,5 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:scrollbarStyle="outsideOverlay"
-    app:tsquare_displayAlwaysDigitNumbers="true"
+    app:calendarvert_displayAlwaysDigitNumbers="true"
     />

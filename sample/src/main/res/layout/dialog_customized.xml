@@ -1,4 +1,4 @@
-<com.squareup.timessquare.CalendarPickerView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.thiago.calendarvertical.CalendarPickerView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/calendar_view"
     android:layout_width="match_parent"
@@ -10,9 +10,9 @@
     android:paddingBottom="16dp"
     android:scrollbarStyle="outsideOverlay"
     android:theme="@style/MyTheme"
-    app:tsquare_dayBackground="@drawable/custom_calendar_bg_selector"
-    app:tsquare_dayTextColor="@color/custom_calendar_text_selector"
-    app:tsquare_displayDayNamesHeaderRow="false"
-    app:tsquare_dividerColor="@color/transparent"
-    app:tsquare_headerTextColor="@color/custom_header_text"
-    app:tsquare_titleTextStyle="@style/CustomCalendarTitle" />
+    app:calendarvert_dayBackground="@drawable/custom_calendar_bg_selector"
+    app:calendarvert_dayTextColor="@color/custom_calendar_text_selector"
+    app:calendarvert_displayDayNamesHeaderRow="false"
+    app:calendarvert_dividerColor="@color/transparent"
+    app:calendarvert_headerTextColor="@color/custom_header_text"
+    app:calendarvert_titleTextStyle="@style/CustomCalendarTitle" />

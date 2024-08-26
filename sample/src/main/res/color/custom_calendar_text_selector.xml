@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright 2014 Square, Inc. -->
-
 <selector xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:state_selected="true" android:color="?textSelected"/>
     <item android:state_pressed="true" android:color="?textSelected"/>
-    <item app:tsquare_state_current_month="false" android:color="?textDisabled"/>
-    <item app:tsquare_state_today="true" android:color="?textSelected"/>
-    <item app:tsquare_state_selectable="false" android:color="?textDisabled" />
+    <item app:calendarvert_state_current_month="false" android:color="?textDisabled"/>
+    <item app:calendarvert_state_today="true" android:color="?textSelected"/>
+    <item app:calendarvert_state_selectable="false" android:color="?textDisabled" />
     <item android:color="?textDefault"/>
 </selector>

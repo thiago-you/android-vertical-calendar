@@ -1,4 +1,4 @@
-package com.squareup.timessquare;
+package com.thiago.calendarvertical;
 
 import java.util.Date;
 

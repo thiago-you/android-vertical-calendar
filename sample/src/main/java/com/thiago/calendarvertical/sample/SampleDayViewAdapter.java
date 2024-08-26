@@ -1,10 +1,12 @@
-package com.squareup.timessquare.sample;
+package com.thiago.calendarvertical.sample;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
-import com.squareup.timessquare.CalendarCellView;
-import com.squareup.timessquare.DayViewAdapter;
+import com.thiago.calendarvertical.CalendarCellView;
+import com.thiago.calendarvertical.DayViewAdapter;
+
+import you.thiago.calendarvert.sample.R;
 
 public class SampleDayViewAdapter implements DayViewAdapter {
   @Override public void makeCellView(CalendarCellView parent) {

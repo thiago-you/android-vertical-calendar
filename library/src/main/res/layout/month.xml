@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<com.squareup.timessquare.MonthView
+<com.thiago.calendarvertical.MonthView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -9,12 +9,12 @@
 
   <!-- This is the place where the month title is added -->
 
-  <com.squareup.timessquare.CalendarGridView
+  <com.thiago.calendarvertical.CalendarGridView
       android:id="@+id/calendar_grid"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       >
-    <com.squareup.timessquare.CalendarRowView
+    <com.thiago.calendarvertical.CalendarRowView
         android:id="@+id/day_names_header_row"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -55,12 +55,12 @@
           android:layout_height="wrap_content"
           style="@style/CalendarCell.DayHeader"
           />
-    </com.squareup.timessquare.CalendarRowView>
+    </com.thiago.calendarvertical.CalendarRowView>
     <include layout="@layout/week"/>
     <include layout="@layout/week"/>
     <include layout="@layout/week"/>
     <include layout="@layout/week"/>
     <include layout="@layout/week"/>
     <include layout="@layout/week"/>
-  </com.squareup.timessquare.CalendarGridView>
-</com.squareup.timessquare.MonthView>
+  </com.thiago.calendarvertical.CalendarGridView>
+</com.thiago.calendarvertical.MonthView>

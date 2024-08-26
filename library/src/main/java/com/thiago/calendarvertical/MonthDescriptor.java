@@ -1,5 +1,4 @@
-// Copyright 2012 Square, Inc.
-package com.squareup.timessquare;
+package com.thiago.calendarvertical;
 
 import java.util.Date;
 

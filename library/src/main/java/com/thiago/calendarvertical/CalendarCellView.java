@@ -1,33 +1,33 @@
-// Copyright 2013 Square, Inc.
-
-package com.squareup.timessquare;
+package com.thiago.calendarvertical;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import you.thiago.calendarvert.R;
+
 public class CalendarCellView extends FrameLayout {
   private static final int[] STATE_SELECTABLE = {
-      R.attr.tsquare_state_selectable
+      R.attr.calendarvert_state_selectable
   };
   private static final int[] STATE_CURRENT_MONTH = {
-      R.attr.tsquare_state_current_month
+      R.attr.calendarvert_state_current_month
   };
   private static final int[] STATE_TODAY = {
-      R.attr.tsquare_state_today
+      R.attr.calendarvert_state_today
   };
   private static final int[] STATE_HIGHLIGHTED = {
-      R.attr.tsquare_state_highlighted
+      R.attr.calendarvert_state_highlighted
   };
   private static final int[] STATE_RANGE_FIRST = {
-      R.attr.tsquare_state_range_first
+      R.attr.calendarvert_state_range_first
   };
   private static final int[] STATE_RANGE_MIDDLE = {
-      R.attr.tsquare_state_range_middle
+      R.attr.calendarvert_state_range_middle
   };
   private static final int[] STATE_RANGE_LAST = {
-      R.attr.tsquare_state_range_last
+      R.attr.calendarvert_state_range_last
   };
 
   private boolean isSelectable = false;

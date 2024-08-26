@@ -1,9 +1,9 @@
-TimesSquare for Android
+Android Calendar Vertical
 ==========================
 
 Standalone Android widget for picking a single date from a calendar view.
 
-![Screenshot](timesSquareScreenshot.png)
+![Screenshot](screenshot.png)
 
 
 Usage
@@ -12,7 +12,7 @@ Usage
 Include `CalendarPickerView` in your layout XML.
 
 ```xml
-<com.squareup.timessquare.CalendarPickerView
+<you.thiago.calendarvert.CalendarPickerView
     android:id="@+id/calendar_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -46,33 +46,31 @@ calendar.init(today, nextYear.getTime())
 ```
 
 
-Download
---------
+## Installation
 
-The latest version can be downloaded in [zip][zip] and referenced by your application as a library
-project.
+Step 1. Add the JitPack repository to your build file
 
-You can also depend on the library through Maven:
-```xml
-<dependency>
-  <groupId>com.squareup</groupId>
-  <artifactId>android-times-square</artifactId>
-  <version>1.6.5</version>
-  <type>apklib</type>
-</dependency>
-```
-or Gradle:
 ```groovy
-compile 'com.squareup:android-times-square:1.6.5@aar'
+allprojects {
+  repositories {
+    ...
+    maven { url 'https://jitpack.io' }
+  }
+}
 ```
 
-Snapshots of the development version are available in [Sonatype's `snapshots` repository][snap].
+Step 2. Add the dependency
 
+```groovy
+dependencies {
+  implementation 'com.github.thiago-you:android-calendar-vertical:1.0.0'
+}
+```
 
 License
 -------
 
-    Copyright 2012 Square, Inc.
+    Copyright 2024, Inc.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -85,8 +83,3 @@ License
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
-
-
-
- [zip]: https://github.com/square/android-times-square/archive/master.zip
- [snap]: https://oss.sonatype.org/content/repositories/snapshots/

@@ -1,61 +1,42 @@
-apply plugin: 'com.android.library'
-apply plugin: 'checkstyle'
-apply plugin: 'com.vanniktech.maven.publish'
-
-task checkstyle(type: Checkstyle) {
-  configFile rootProject.file('checkstyle.xml')
-  source 'src/main/java'
-  ignoreFailures false
-  showViolations true
-  include '**/*.java'
-
-  classpath = files()
-}
-
-afterEvaluate {
-  if (project.tasks.findByName('check')) {
-    check.dependsOn('checkstyle')
-  }
+plugins {
+  id 'com.android.library'
+  id 'kotlin-android'
 }
 
 android {
-  compileSdkVersion rootProject.ext.compileSdkVersion
+  namespace "you.thiago.calendarvert"
+
+  compileSdk rootProject.ext.targetSdkVersion
 
   defaultConfig {
     minSdkVersion rootProject.ext.minSdkVersion
+    targetSdkVersion rootProject.ext.targetSdkVersion
+  }
+
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    }
+  }
+
+  compileOptions {
+    sourceCompatibility rootProject.ext.sourceCompatibilityVersion
+    targetCompatibility rootProject.ext.targetCompatibilityVersion
   }
 
   lintOptions {
-    warning 'MissingTranslation'
-    textReport true
-    textOutput 'stdout'
-  }
-
-  testOptions {
-    unitTests {
-      includeAndroidResources = true
-    }
-    unitTests.all {
-      testLogging {
-        events "passed", "skipped", "failed", "standardOut", "standardError"
-        exceptionFormat "full"
-      }
-    }
+    abortOnError false
   }
 }
 
 dependencies {
-  implementation deps.androidXCore
-  testImplementation deps.junit
-  testImplementation deps.robolectric
-  testImplementation deps.intellijannotations
-  testImplementation deps.truth
-}
+  implementation rootProject.ext.androidXCore
+  implementation rootProject.ext.appCompat
+  implementation rootProject.ext.annotations
 
-allprojects {
-  plugins.withId("com.vanniktech.maven.publish") {
-    mavenPublish {
-      sonatypeHost = "S01"
-    }
-  }
+  testImplementation rootProject.ext.junit
+  testImplementation rootProject.ext.robolectric
+  testImplementation rootProject.ext.intellijannotations
+  testImplementation rootProject.ext.truth
 }

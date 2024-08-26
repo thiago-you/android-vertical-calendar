@@ -1,23 +1,30 @@
-apply plugin: 'com.android.application'
+plugins {
+  id 'com.android.application'
+  id 'kotlin-android'
+}
 
 android {
-  compileSdkVersion rootProject.ext.compileSdkVersion
+  namespace "you.thiago.calendarvert.sample"
+
+  compileSdk rootProject.ext.targetSdkVersion
+
+
+  defaultConfig {
+    applicationId "you.thiago.calendarvert.sample"
+
+    minSdkVersion rootProject.ext.minSdkVersion
+    targetSdkVersion rootProject.ext.targetSdkVersion
+    versionCode rootProject.ext.versionCode
+    versionName rootProject.ext.versionName
+  }
+
+  lintOptions {
+    abortOnError false
+  }
 
   compileOptions {
     sourceCompatibility rootProject.ext.sourceCompatibilityVersion
     targetCompatibility rootProject.ext.targetCompatibilityVersion
-  }
-
-  defaultConfig {
-    applicationId 'com.squareup.timessquare.sample'
-    minSdkVersion rootProject.ext.minSdkVersion
-    targetSdkVersion rootProject.ext.targetSdkVersion
-    versionCode 1
-    versionName '1.0.0'
-  }
-
-  lintOptions {
-    disable 'MissingTranslation'
   }
 }
 
