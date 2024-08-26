@@ -1,10 +1,10 @@
-package com.thiago.calendarvertical.sample;
+package you.thiago.calendarvertical.sample;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
-import com.thiago.calendarvertical.CalendarCellView;
-import com.thiago.calendarvertical.DayViewAdapter;
+import you.thiago.calendarvertical.CalendarCellView;
+import you.thiago.calendarvertical.DayViewAdapter;
 
 import you.thiago.calendarvert.sample.R;
 

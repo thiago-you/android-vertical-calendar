@@ -1,4 +1,4 @@
-package com.thiago.calendarvertical;
+package you.thiago.calendarvertical;
 
 import android.app.Activity;
 import android.widget.TextView;

@@ -1,4 +1,4 @@
-package com.thiago.calendarvertical;
+package you.thiago.calendarvertical;
 
 import java.util.Date;
 

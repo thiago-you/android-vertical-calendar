@@ -1,4 +1,4 @@
-package com.thiago.calendarvertical;
+package you.thiago.calendarvertical;
 
 import static androidx.core.text.TextUtilsCompat.getLayoutDirectionFromLocale;
 
@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.core.view.ViewCompat;
 import you.thiago.calendarvert.R;
 
@@ -113,7 +115,11 @@ public class MonthView extends LinearLayout {
   public void init(MonthDescriptor month, List<List<MonthCellDescriptor>> cells,
       boolean displayOnly, Typeface titleTypeface, Typeface dateTypeface) {
     long start = System.currentTimeMillis();
-    title.setText(month.getLabel());
+
+    String label = month.getLabel();
+    label = label.substring(0, 1).toUpperCase() + label.substring(1);
+    title.setText(label);
+
     NumberFormat numberFormatter;
     if (alwaysDigitNumbers) {
       numberFormatter = NumberFormat.getInstance(Locale.US);

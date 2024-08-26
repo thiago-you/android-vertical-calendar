@@ -1,10 +1,10 @@
-package com.thiago.calendarvertical.sample;
+package you.thiago.calendarvertical.sample;
 
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.RelativeSizeSpan;
-import com.thiago.calendarvertical.CalendarCellDecorator;
-import com.thiago.calendarvertical.CalendarCellView;
+import you.thiago.calendarvertical.CalendarCellDecorator;
+import you.thiago.calendarvertical.CalendarCellView;
 
 import java.util.Date;
 

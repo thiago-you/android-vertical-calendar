@@ -5,6 +5,8 @@
     <item name="android:gravity">center_horizontal</item>
     <item name="android:paddingBottom">@dimen/calendar_month_title_bottommargin</item>
     <item name="android:paddingTop">@dimen/calendar_month_topmargin</item>
+    <item name="android:textColor">@color/calendar_text_gray</item>
+    <item name="android:fontFamily">@font/inter_bold_700</item>
   </style>
 
   <style name="CalendarCell">

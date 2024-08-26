@@ -1,4 +1,4 @@
-package com.thiago.calendarvertical;
+package you.thiago.calendarvertical;
 
 import android.view.ContextThemeWrapper;
 import android.widget.FrameLayout;

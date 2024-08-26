@@ -1,4 +1,4 @@
-package com.thiago.calendarvertical.sample;
+package you.thiago.calendarvertical.sample;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -10,9 +10,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
-import com.thiago.calendarvertical.CalendarCellDecorator;
-import com.thiago.calendarvertical.CalendarPickerView;
-import com.thiago.calendarvertical.DefaultDayViewAdapter;
+import you.thiago.calendarvertical.CalendarCellDecorator;
+import you.thiago.calendarvertical.CalendarPickerView;
+import you.thiago.calendarvertical.DefaultDayViewAdapter;
 
 import java.util.ArrayList;
 import java.util.Arrays;

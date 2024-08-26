@@ -1,4 +1,4 @@
-package com.thiago.calendarvertical;
+package you.thiago.calendarvertical;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
