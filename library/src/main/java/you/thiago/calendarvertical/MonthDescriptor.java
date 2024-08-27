@@ -2,48 +2,50 @@ package you.thiago.calendarvertical;
 
 import java.util.Date;
 
-class MonthDescriptor {
-  private final int month;
-  private final int year;
-  private final Date date;
-  private String label;
+public class MonthDescriptor {
 
-  MonthDescriptor(int month, int year, Date date, String label) {
-    this.month = month;
-    this.year = year;
-    this.date = date;
-    this.label = label;
-  }
+    private final int month;
+    private final int year;
+    private final Date date;
+    private String label;
 
-  public int getMonth() {
-    return month;
-  }
+    MonthDescriptor(int month, int year, Date date, String label) {
+        this.month = month;
+        this.year = year;
+        this.date = date;
+        this.label = label;
+    }
 
-  public int getYear() {
-    return year;
-  }
+    public int getMonth() {
+        return month;
+    }
 
-  public Date getDate() {
-    return date;
-  }
+    public int getYear() {
+        return year;
+    }
 
-  public String getLabel() {
-    return label;
-  }
+    public Date getDate() {
+        return date;
+    }
 
-  void setLabel(String label) {
-    this.label = label;
-  }
+    public String getLabel() {
+        return label;
+    }
 
-  @Override public String toString() {
-    return "MonthDescriptor{"
-        + "label='"
-        + label
-        + '\''
-        + ", month="
-        + month
-        + ", year="
-        + year
-        + '}';
-  }
+    void setLabel(String label) {
+        this.label = label;
+    }
+
+    @Override
+    public String toString() {
+        return "MonthDescriptor{"
+               + "label='"
+               + label
+               + '\''
+               + ", month="
+               + month
+               + ", year="
+               + year
+               + '}';
+    }
 }

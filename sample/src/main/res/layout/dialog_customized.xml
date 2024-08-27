@@ -13,6 +13,5 @@
     app:calendarvert_dayBackground="@drawable/custom_calendar_bg_selector"
     app:calendarvert_dayTextColor="@color/custom_calendar_text_selector"
     app:calendarvert_displayDayNamesHeaderRow="false"
-    app:calendarvert_dividerColor="@color/transparent"
     app:calendarvert_headerTextColor="@color/custom_header_text"
     app:calendarvert_titleTextStyle="@style/CustomCalendarTitle" />

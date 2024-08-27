@@ -27,7 +27,6 @@ public class CalendarRowView extends ViewGroup implements View.OnClickListener {
   }
 
   @Override protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-    long start = System.currentTimeMillis();
     final int totalWidth = MeasureSpec.getSize(widthMeasureSpec);
     int rowHeight = 0;
     int cellHeightSpec = makeMeasureSpec(totalWidth, AT_MOST);
@@ -47,13 +46,14 @@ public class CalendarRowView extends ViewGroup implements View.OnClickListener {
         rowHeight = child.getMeasuredHeight();
       }
     }
+
     final int widthWithPadding = totalWidth + getPaddingLeft() + getPaddingRight();
     final int heightWithPadding = rowHeight + getPaddingTop() + getPaddingBottom();
+
     setMeasuredDimension(widthWithPadding, heightWithPadding);
   }
 
   @Override protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-    long start = System.currentTimeMillis();
     int cellHeight = bottom - top;
     int width = right - left;
     for (int c = 0, numChildren = getChildCount(); c < numChildren; c++) {

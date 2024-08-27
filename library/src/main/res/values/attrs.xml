@@ -2,7 +2,6 @@
 <resources>
   <declare-styleable name="CalendarPickerView">
     <attr name="android:background"/>
-    <attr name="calendarvert_dividerColor" format="color"/>
     <attr name="calendarvert_dayBackground" format="reference"/>
     <attr name="calendarvert_dayTextColor" format="color"/>
     <attr name="calendarvert_titleTextStyle" format="reference"/>
