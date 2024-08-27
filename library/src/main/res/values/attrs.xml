@@ -7,6 +7,7 @@
     <attr name="calendarvert_titleTextStyle" format="reference"/>
     <attr name="calendarvert_displayHeader" format="boolean"/>
     <attr name="calendarvert_displayDayNamesHeaderRow" format="boolean"/>
+    <attr name="calendarvert_displayDayNamesAsCalendarHeader" format="boolean"/>
     <attr name="calendarvert_displayAlwaysDigitNumbers" format="boolean"/>
     <attr name="calendarvert_headerTextColor" format="color"/>
   </declare-styleable>

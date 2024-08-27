@@ -17,6 +17,7 @@ import you.thiago.calendarvert.R;
 
 import java.text.DateFormat;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
@@ -38,20 +39,21 @@ public class MonthView extends LinearLayout {
             ViewGroup parent, LayoutInflater inflater,
             DateFormat weekdayNameFormat, Listener listener, Calendar today,
             int dayBackgroundResId, int dayTextColorResId, int titleTextStyle, boolean displayHeader,
-            int headerTextColor, boolean showDayNamesHeaderRowView, Locale locale,
-            boolean showAlwaysDigitNumbers, DayViewAdapter adapter
+            int headerTextColor, boolean showDayNamesHeaderRowView, boolean displayDayNamesAsCalendarHeader,
+            Locale locale, boolean showAlwaysDigitNumbers, DayViewAdapter adapter
     ) {
         return create(parent, inflater, weekdayNameFormat, listener, today,
                       dayBackgroundResId, dayTextColorResId, titleTextStyle, displayHeader, headerTextColor,
-                      showDayNamesHeaderRowView, showAlwaysDigitNumbers, null, locale, adapter);
+                      showDayNamesHeaderRowView, displayDayNamesAsCalendarHeader, 
+                      showAlwaysDigitNumbers, null, locale, adapter);
     }
 
     public static MonthView create(
             ViewGroup parent, LayoutInflater inflater,
             DateFormat weekdayNameFormat, Listener listener, Calendar today,
             int dayBackgroundResId, int dayTextColorResId, int titleTextStyle, boolean displayHeader,
-            int headerTextColor, boolean displayDayNamesHeaderRowView, boolean showAlwaysDigitNumbers,
-            List<CalendarCellDecorator> decorators, Locale locale, DayViewAdapter adapter
+            int headerTextColor, boolean displayDayNamesHeaderRowView, boolean displayDayNamesAsCalendarHeader,
+            boolean showAlwaysDigitNumbers, List<CalendarCellDecorator> decorators, Locale locale, DayViewAdapter adapter
     ) {
         final MonthView view = (MonthView) inflater.inflate(R.layout.month, parent, false);
 
@@ -77,15 +79,18 @@ public class MonthView extends LinearLayout {
         view.locale = locale;
         view.alwaysDigitNumbers = showAlwaysDigitNumbers;
         int firstDayOfWeek = today.getFirstDayOfWeek();
-        final CalendarRowView headerRow = (CalendarRowView) view.grid.getChildAt(0);
 
-        if (displayDayNamesHeaderRowView) {
+        if (displayDayNamesHeaderRowView && !displayDayNamesAsCalendarHeader) {
+            List<String> weekDaysNames = new ArrayList<>();
             final int originalDayOfWeek = today.get(Calendar.DAY_OF_WEEK);
+
             for (int offset = 0; offset < 7; offset++) {
                 today.set(Calendar.DAY_OF_WEEK, getDayOfWeek(firstDayOfWeek, offset, view.isRtl));
-                final TextView textView = (TextView) headerRow.getChildAt(offset);
-                textView.setText(weekdayNameFormat.format(today.getTime()));
+                weekDaysNames.add(weekdayNameFormat.format(today.getTime()));
             }
+            
+            view.setWeekDaysNames(weekDaysNames);
+            
             today.set(Calendar.DAY_OF_WEEK, originalDayOfWeek);
         } else {
             view.dayNamesHeaderRowView.setVisibility(View.GONE);
@@ -93,6 +98,7 @@ public class MonthView extends LinearLayout {
 
         view.listener = listener;
         view.decorators = decorators;
+
         return view;
     }
 
@@ -234,6 +240,27 @@ public class MonthView extends LinearLayout {
         grid.setHeaderTextColor(color);
     }
 
+    public void setWeekDaysNames(List<String> weekDaysNames) {
+        final CalendarRowView headerRow = (CalendarRowView) grid.getChildAt(0);
+
+        if (weekDaysNames.size() != 7) {
+            throw new IllegalArgumentException("Week days names must have 7 elements");
+        }
+
+        for (int i = 0; i < weekDaysNames.size(); i++) {
+            final TextView textView = (TextView) headerRow.getChildAt(i);
+
+            String dayName = weekDaysNames.get(i);
+            
+            dayName = dayName.substring(0, 1).toUpperCase() + dayName.substring(1);
+            dayName = dayName.replace(".", "")
+                             .replace(",", "")
+                             .trim();
+
+            textView.setText(dayName);
+        }
+    }
+    
     public interface Listener {
 
         void handleClick(MonthCellDescriptor cell);
