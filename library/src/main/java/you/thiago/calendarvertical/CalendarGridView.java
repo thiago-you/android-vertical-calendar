@@ -17,7 +17,7 @@ import static android.view.View.MeasureSpec.EXACTLY;
 import static android.view.View.MeasureSpec.makeMeasureSpec;
 
 /**
- * ViewGroup that draws a grid of calendar cells.  All children must be {@link CalendarRowView}s.
+ * ViewGroup that draws a grid of calendar cells. All children must be {@link CalendarRowView}s.
  * The first row is assumed to be a header and no divider is drawn above it.
  */
 public class CalendarGridView extends ViewGroup {
