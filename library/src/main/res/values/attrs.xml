@@ -2,6 +2,18 @@
 <resources>
   <declare-styleable name="CalendarPickerView">
     <attr name="android:background"/>
+    <attr name="calendarpicker_dayBackground" format="reference"/>
+    <attr name="calendarpicker_dayTextColor" format="color"/>
+    <attr name="calendarpicker_titleTextStyle" format="reference"/>
+    <attr name="calendarpicker_displayHeader" format="boolean"/>
+    <attr name="calendarpicker_displayDayNamesHeaderRow" format="boolean"/>
+    <attr name="calendarpicker_displayDayNamesAsCalendarHeader" format="boolean"/>
+    <attr name="calendarpicker_displayAlwaysDigitNumbers" format="boolean"/>
+    <attr name="calendarpicker_headerTextColor" format="color"/>
+  </declare-styleable>
+
+  <declare-styleable name="CalendarVertical">
+    <attr name="android:background"/>
     <attr name="calendarvert_dayBackground" format="reference"/>
     <attr name="calendarvert_dayTextColor" format="color"/>
     <attr name="calendarvert_titleTextStyle" format="reference"/>
@@ -11,7 +23,7 @@
     <attr name="calendarvert_displayAlwaysDigitNumbers" format="boolean"/>
     <attr name="calendarvert_headerTextColor" format="color"/>
   </declare-styleable>
-
+  
   <declare-styleable name="calendar_cell">
     <attr name="calendarvert_state_selectable" format="boolean" />
     <attr name="calendarvert_state_current_month" format="boolean" />

@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import androidx.core.content.ContextCompat;
 import you.thiago.calendarvert.R;
 
 import static java.util.Calendar.DATE;
@@ -71,6 +72,8 @@ public class CalendarPickerView extends ListView {
     private static final ArrayList<String> explicitlyNumericYearLocaleLanguages =
             new ArrayList<>(Arrays.asList("ar", "my"));
 
+    private CalendarVertical calendarVertical = null;
+    
     private final CalendarPickerView.MonthAdapter adapter;
     private final IndexedLinkedHashMap<String, List<List<MonthCellDescriptor>>> cells =
             new IndexedLinkedHashMap<>();
@@ -128,32 +131,52 @@ public class CalendarPickerView extends ListView {
     public CalendarPickerView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        Resources res = context.getResources();
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CalendarPickerView);
-        final int bg = a.getColor(R.styleable.CalendarPickerView_android_background,
-                                  res.getColor(R.color.calendar_bg));
-        dayBackgroundResId = a.getResourceId(R.styleable.CalendarPickerView_calendarvert_dayBackground,
-                                             R.drawable.calendar_bg_selector);
-        dayTextColorResId = a.getResourceId(R.styleable.CalendarPickerView_calendarvert_dayTextColor,
-                                            R.color.calendar_text_selector);
-        titleTextStyle = a.getResourceId(R.styleable.CalendarPickerView_calendarvert_titleTextStyle,
-                                         R.style.CalendarTitle);
-        displayHeader = a.getBoolean(R.styleable.CalendarPickerView_calendarvert_displayHeader, true);
-        headerTextColor = a.getColor(R.styleable.CalendarPickerView_calendarvert_headerTextColor,
-                                     res.getColor(R.color.calendar_text_active));
-        displayDayNamesHeaderRow =
-                a.getBoolean(R.styleable.CalendarPickerView_calendarvert_displayDayNamesHeaderRow, true);
-        displayDayNamesAsCalendarHeader =
-                a.getBoolean(R.styleable.CalendarPickerView_calendarvert_displayDayNamesAsCalendarHeader, false);
-        displayAlwaysDigitNumbers =
-                a.getBoolean(R.styleable.CalendarPickerView_calendarvert_displayAlwaysDigitNumbers, false);
-        a.recycle();
+        try (TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CalendarPickerView)) {
+            final int bg = a.getColor(R.styleable.CalendarPickerView_android_background, ContextCompat.getColor(context, R.color.calendar_bg));
+            
+            dayBackgroundResId = a.getResourceId(R.styleable.CalendarPickerView_calendarpicker_dayBackground, R.drawable.calendar_bg_selector);
+            dayTextColorResId = a.getResourceId(R.styleable.CalendarPickerView_calendarpicker_dayTextColor, R.color.calendar_text_selector);
+            titleTextStyle = a.getResourceId(R.styleable.CalendarPickerView_calendarpicker_titleTextStyle, R.style.CalendarTitle);
+            headerTextColor = a.getColor(R.styleable.CalendarPickerView_calendarpicker_headerTextColor, ContextCompat.getColor(context, R.color.calendar_text_active));
+            displayHeader = a.getBoolean(R.styleable.CalendarPickerView_calendarpicker_displayHeader, true);
+            displayDayNamesHeaderRow = a.getBoolean(R.styleable.CalendarPickerView_calendarpicker_displayDayNamesHeaderRow, true);
+            displayDayNamesAsCalendarHeader = a.getBoolean(R.styleable.CalendarPickerView_calendarpicker_displayDayNamesAsCalendarHeader, false);
+            displayAlwaysDigitNumbers = a.getBoolean(R.styleable.CalendarPickerView_calendarpicker_displayAlwaysDigitNumbers, false);
+         
+            adapter = new MonthAdapter();
+        
+            setupView(context, bg);
+        }
+    }
+
+    public CalendarPickerView(
+            CalendarVertical calendarVertical, Context context, AttributeSet attrs, int bg, int dayBackgroundResId,
+            int dayTextColorResId, int titleTextStyle, boolean displayHeader, int headerTextColor,
+            boolean displayDayNamesHeaderRow, boolean displayDayNamesAsCalendarHeader, boolean displayAlwaysDigitNumbers
+    ) {
+        super(context, attrs);
+        
+        this.calendarVertical = calendarVertical;
+        this.dayBackgroundResId = dayBackgroundResId;
+        this.dayTextColorResId = dayTextColorResId;
+        this.titleTextStyle = titleTextStyle;
+        this.displayHeader = displayHeader;
+        this.headerTextColor = headerTextColor;
+        this.displayDayNamesHeaderRow = displayDayNamesHeaderRow;
+        this.displayDayNamesAsCalendarHeader = displayDayNamesAsCalendarHeader;
+        this.displayAlwaysDigitNumbers = displayAlwaysDigitNumbers;
 
         adapter = new MonthAdapter();
+
+        setupView(context, bg);
+    }
+    
+    private void setupView(Context context, int bg) {
         setDivider(null);
         setDividerHeight(0);
         setBackgroundColor(bg);
         setCacheColorHint(bg);
+        
         timeZone = TimeZone.getDefault();
         locale = Locale.getDefault();
         today = Calendar.getInstance(timeZone, locale);
@@ -354,6 +377,18 @@ public class CalendarPickerView extends ListView {
          */
         public FluentInitializer withSelectedDate(Date selectedDates) {
             return withSelectedDates(Collections.singletonList(selectedDates));
+        }
+
+        /**
+         * Set an initially-selected date.  The calendar will scroll to that date if it's not already
+         * visible.
+         */
+        public FluentInitializer setWeekDaysHeader(List<String> weekDays) {
+            if (calendarVertical != null) {
+                calendarVertical.setWeekDaysNames(weekDays);
+            }
+
+            return this;
         }
 
         /**

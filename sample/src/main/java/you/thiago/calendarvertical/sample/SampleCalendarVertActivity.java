@@ -11,6 +11,7 @@ import android.widget.Toast;
 import org.jetbrains.annotations.NotNull;
 
 import you.thiago.calendarvertical.CalendarPickerView;
+import you.thiago.calendarvertical.CalendarVertical;
 import you.thiago.calendarvertical.DefaultDayViewAdapter;
 
 import java.util.ArrayList;
@@ -46,8 +47,8 @@ public class SampleCalendarVertActivity extends Activity {
         final Calendar lastYear = Calendar.getInstance();
         lastYear.add(Calendar.YEAR, -1);
 
-        calendar = findViewById(R.id.calendar_view);
-
+        calendar = ((CalendarVertical) findViewById(R.id.calendar_vertical)).getInstance();
+        
         calendar.init(lastYear.getTime(), nextYear.getTime())
                 .inMode(CalendarPickerView.SelectionMode.SINGLE) 
                 .withSelectedDate(new Date());

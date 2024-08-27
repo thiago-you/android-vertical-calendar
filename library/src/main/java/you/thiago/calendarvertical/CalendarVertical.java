@@ -1,9 +1,12 @@
 package you.thiago.calendarvertical;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -14,80 +17,91 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import androidx.core.content.ContextCompat;
 import you.thiago.calendarvert.R;
+
+import static androidx.core.text.TextUtilsCompat.getLayoutDirectionFromLocale;
 
 public class CalendarVertical extends LinearLayout {
 
-    private final CalendarGridView grid;
     private final CalendarPickerView calendar;
+    private final CalendarRowView rowViewWeekDaysHeader;
     
     public CalendarVertical(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        grid = findViewById(R.id.calendar_grid);
+        final ViewGroup view = (ViewGroup) LayoutInflater.from(context).inflate(R.layout.calendar_vertical, this, false);
         
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CalendarPickerView);
+        addView(view);
         
-        boolean displayDayNamesHeaderRow =
-                a.getBoolean(R.styleable.CalendarPickerView_calendarvert_displayDayNamesHeaderRow, true);
+        rowViewWeekDaysHeader = view.findViewById(R.id.day_names_header_row);
         
-        boolean displayDayNamesAsCalendarHeader =
-                a.getBoolean(R.styleable.CalendarPickerView_calendarvert_displayDayNamesAsCalendarHeader, false);
-        
-        
-        if (!displayDayNamesHeaderRow && displayDayNamesAsCalendarHeader) {
+        try (TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CalendarVertical)) {
+            final int bg = a.getColor(R.styleable.CalendarPickerView_android_background, ContextCompat.getColor(context, R.color.calendar_bg));
+            
+            int dayBackgroundResId = a.getResourceId(R.styleable.CalendarPickerView_calendarpicker_dayBackground, R.drawable.calendar_bg_selector);
+            int dayTextColorResId = a.getResourceId(R.styleable.CalendarPickerView_calendarpicker_dayTextColor, R.color.calendar_text_selector);
+            int titleTextStyle = a.getResourceId(R.styleable.CalendarPickerView_calendarpicker_titleTextStyle, R.style.CalendarTitle);
+            int headerTextColor = a.getColor(R.styleable.CalendarPickerView_calendarpicker_headerTextColor, ContextCompat.getColor(context, R.color.calendar_text_active));
+            boolean displayHeader = a.getBoolean(R.styleable.CalendarPickerView_calendarpicker_displayHeader, true);
+            boolean displayDayNamesHeaderRow = a.getBoolean(R.styleable.CalendarPickerView_calendarpicker_displayDayNamesHeaderRow, false);
+            boolean displayDayNamesAsCalendarHeader = a.getBoolean(R.styleable.CalendarVertical_calendarvert_displayDayNamesAsCalendarHeader, true);
+            boolean displayAlwaysDigitNumbers = a.getBoolean(R.styleable.CalendarPickerView_calendarpicker_displayAlwaysDigitNumbers, false);
+
+            setupWeekDaysHeader(context, displayDayNamesAsCalendarHeader);
+
+            calendar = new CalendarPickerView(
+                    this,
+                    context,
+                    attrs,
+                    bg,
+                    dayBackgroundResId,
+                    dayTextColorResId,
+                    titleTextStyle,
+                    displayHeader,
+                    headerTextColor,
+                    displayDayNamesHeaderRow,
+                    displayDayNamesAsCalendarHeader,
+                    displayAlwaysDigitNumbers
+            );
+    
+            view.addView(calendar);
+        }
+    }
+
+    private void setupWeekDaysHeader(Context context, boolean displayDayNamesAsCalendarHeader) {
+        if (displayDayNamesAsCalendarHeader) {
             SimpleDateFormat weekdayNameFormat = new SimpleDateFormat(context.getString(R.string.day_name_format), Locale.getDefault());
             List<String> weekDaysNames = new ArrayList<>();
 
+            Calendar today = Calendar.getInstance();
+            today.setTime(new Date());
+
+            int firstDayOfWeek = today.getFirstDayOfWeek();
+            boolean isRtl = getLayoutDirectionFromLocale(Locale.getDefault()) == View.LAYOUT_DIRECTION_RTL;
+
             for (int offset = 0; offset < 7; offset++) {
-                weekDaysNames.add(weekdayNameFormat.format(Calendar.getInstance().getTime()));
+                today.set(Calendar.DAY_OF_WEEK, getDayOfWeek(firstDayOfWeek, offset, isRtl));
+                weekDaysNames.add(weekdayNameFormat.format(today.getTime()));
             }
 
             setWeekDaysNames(weekDaysNames);
         } else {
-            grid.setVisibility(View.GONE);
+            rowViewWeekDaysHeader.setVisibility(View.GONE);
         }
-
-        calendar = new CalendarPickerView(context, attrs);
-
-        addView(calendar);
     }
 
-    /**
-     * Both date parameters must be non-null and their {@link Date#getTime()} must not return 0. Time
-     * of day will be ignored.  For instance, if you pass in {@code minDate} as 11/16/2012 5:15pm and
-     * {@code maxDate} as 11/16/2013 4:30am, 11/16/2012 will be the first selectable date and
-     * 11/15/2013 will be the last selectable date ({@code maxDate} is exclusive).
-     * <p>
-     * This will implicitly set the {@link CalendarPickerView.SelectionMode} to {@link CalendarPickerView.SelectionMode#SINGLE}.  If you
-     * want a different selection mode, use {@link CalendarPickerView.FluentInitializer#inMode(CalendarPickerView.SelectionMode)} on the
-     * {@link CalendarPickerView.FluentInitializer} this method returns.
-     * <p>
-     * The calendar will be constructed using the default locale as returned by
-     * {@link java.util.Locale#getDefault()} and default time zone as returned by
-     * {@link java.util.TimeZone#getDefault()}. If you wish the calendar to be constructed using a
-     * different locale or time zone, use
-     * <p>
-     * {@link CalendarPickerView#init(java.util.Date, java.util.Date, java.util.Locale)},
-     * {@link CalendarPickerView#init(java.util.Date, java.util.Date, java.util.TimeZone)} or
-     * {@link CalendarPickerView#init(java.util.Date, java.util.Date, java.util.TimeZone, java.util.Locale)}.
-     * <p>
-     * @param minDate Earliest selectable date, inclusive.  Must be earlier than {@code maxDate}.
-     * @param maxDate Latest selectable date, exclusive.  Must be later than {@code minDate}.
-     */
-    public CalendarPickerView.FluentInitializer init(Date minDate, Date maxDate) {
-        return calendar.init(minDate, maxDate);
+    public CalendarPickerView getInstance() {
+        return calendar;
     }
 
     public void setWeekDaysNames(List<String> weekDaysNames) {
-        final CalendarRowView headerRow = (CalendarRowView) grid.getChildAt(0);
-
         if (weekDaysNames.size() != 7) {
             throw new IllegalArgumentException("Week days names must have 7 elements");
         }
 
         for (int i = 0; i < weekDaysNames.size(); i++) {
-            final TextView textView = (TextView) headerRow.getChildAt(i);
+            final TextView textView = (TextView) rowViewWeekDaysHeader.getChildAt(i);
 
             String dayName = weekDaysNames.get(i);
 
@@ -98,5 +112,15 @@ public class CalendarVertical extends LinearLayout {
 
             textView.setText(dayName);
         }
+    }
+
+    private int getDayOfWeek(int firstDayOfWeek, int offset, boolean isRtl) {
+        int dayOfWeek = firstDayOfWeek + offset;
+
+        if (isRtl) {
+            return 8 - dayOfWeek;
+        }
+
+        return dayOfWeek;
     }
 }
