@@ -5,7 +5,7 @@
   <item android:state_pressed="true" android:color="@color/calendar_text_selected"/>
   <item app:calendarvert_state_current_month="false" android:color="@color/calendar_text_inactive"/>
   <item app:calendarvert_state_highlighted="true" android:color="@color/calendar_text_highlighted" />
-  <item app:calendarvert_state_today="true" android:color="@color/calendar_active_month_bg"/>
-  <item app:calendarvert_state_selectable="false" android:color="@color/calendar_text_unselectable" />
-  <item android:color="@color/calendar_text_active"/>
+  <item app:calendarvert_state_today="true" android:color="@color/calendar_text_gray"/>
+  <item app:calendarvert_state_selectable="false" android:color="@color/calendar_text_disabled" />
+  <item android:color="@color/calendar_text_gray"/>
 </selector>

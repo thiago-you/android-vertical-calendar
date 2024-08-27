@@ -65,6 +65,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inter_bold_700"
                 android:textColor="@color/calendar_text_gray_light" />
+            
         </you.thiago.calendarvertical.CalendarRowView>
 
         <include layout="@layout/week" />
@@ -78,5 +79,7 @@
         <include layout="@layout/week" />
 
         <include layout="@layout/week" />
+    
     </you.thiago.calendarvertical.CalendarGridView>
+    
 </you.thiago.calendarvertical.MonthView>

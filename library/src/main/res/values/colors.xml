@@ -1,16 +1,17 @@
 <resources>
-  <color name="calendar_active_month_bg">#fff5f7f9</color>
-  <color name="calendar_bg">#ffffffff</color>
-  <color name="calendar_divider">#ffbababa</color>
-  <color name="calendar_inactive_month_bg">#ffd7d9db</color>
-  <color name="calendar_selected_day_bg">#ff379bff</color>
-  <color name="calendar_highlighted_day_bg">#ccffcc</color>
-  <color name="calendar_selected_range_bg">#ff96caff</color>
-  <color name="calendar_text_inactive">#40778088</color>
+  <color name="calendar_active_month_bg">#ffffff</color>
+  <color name="calendar_bg">#ffffff</color>
+  <color name="calendar_divider">#ffffff</color>
+  <color name="calendar_inactive_month_bg">#ffffff</color>
+  <color name="calendar_selected_day_bg">#FFC655</color>
+  <color name="calendar_highlighted_day_bg">#FFC655</color>
+  <color name="calendar_selected_range_bg">#F1F3F5</color>
+  <color name="calendar_text_inactive">#c7c6c5</color>
   <color name="calendar_text_active">#ff778088</color>
-  <color name="calendar_text_selected">#ffffffff</color>
+  <color name="calendar_text_selected">#000000</color>
   <color name="calendar_text_unselectable">#7f778088</color>
-  <color name="calendar_text_highlighted">#ff778088</color>
+  <color name="calendar_text_highlighted">#FFC655</color>
   <color name="calendar_text_gray">#13100D</color>
   <color name="calendar_text_gray_light">#575756</color>
+  <color name="calendar_text_disabled">#c7c6c5</color>
 </resources>
