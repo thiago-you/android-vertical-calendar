@@ -115,6 +115,16 @@ public class CalendarRowView extends ViewGroup implements View.OnClickListener {
     }
   }
 
+  public void setCellTextFont(Typeface typeFace) {
+    for (int i = 0; i < getChildCount(); i++) {
+      if (getChildAt(i) instanceof CalendarCellView) {
+          ((CalendarCellView) getChildAt(i)).getDayOfMonthTextView().setTypeface(typeFace);
+      } else {
+        ((TextView) getChildAt(i)).setTypeface(typeFace);
+      }
+    }
+  }
+
   public void setTypeface(Typeface typeface) {
     for (int i = 0; i < getChildCount(); i++) {
       if (getChildAt(i) instanceof CalendarCellView) {

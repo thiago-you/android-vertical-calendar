@@ -9,6 +9,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.core.content.res.ResourcesCompat;
 import you.thiago.calendarvert.R;
 
 import static android.os.Build.VERSION;
@@ -65,6 +66,12 @@ public class CalendarGridView extends ViewGroup {
     }
   }
 
+  public void setDayTextFont(int resId) {
+    for (int i = 0; i < getChildCount(); i++) {
+      ((CalendarRowView) getChildAt(i)).setCellTextFont(ResourcesCompat.getFont(getContext(), resId));
+    }
+  }
+  
   public void setDisplayHeader(boolean displayHeader) {
     getChildAt(0).setVisibility(displayHeader ? VISIBLE : GONE);
   }

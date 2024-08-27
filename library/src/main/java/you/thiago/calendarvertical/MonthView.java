@@ -62,6 +62,7 @@ public class MonthView extends LinearLayout {
     view.setDayViewAdapter(adapter);
     view.setDividerColor(dividerColor);
     view.setDayTextColor(dayTextColorResId);
+    view.setDayTextColor(dayTextColorResId);
     view.setDisplayHeader(displayHeader);
     view.setHeaderTextColor(headerTextColor);
 
@@ -153,8 +154,14 @@ public class MonthView extends LinearLayout {
           cellView.setRangeState(cell.getRangeState());
           cellView.setHighlighted(cell.isHighlighted());
           cellView.setTag(cell);
+          
+          if (cell.isSelected()) {
+            cellView.getDayOfMonthTextView().setTypeface(ResourcesCompat.getFont(getContext(), R.font.inter_semibold_600));
+          } else {
+            cellView.getDayOfMonthTextView().setTypeface(ResourcesCompat.getFont(getContext(), R.font.inter_medium_500));
+          }
 
-          if (null != decorators) {
+          if (decorators != null) {
             for (CalendarCellDecorator decorator : decorators) {
               decorator.decorate(cellView, cell.getDate());
             }
@@ -183,6 +190,10 @@ public class MonthView extends LinearLayout {
 
   public void setDayTextColor(int resId) {
     grid.setDayTextColor(resId);
+  }
+  
+  public void setDayTextFont(int resId) {
+    grid.setDayTextFont(resId);
   }
 
   public void setDayViewAdapter(DayViewAdapter adapter) {
