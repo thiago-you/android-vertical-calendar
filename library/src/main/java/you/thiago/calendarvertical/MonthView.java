@@ -148,14 +148,14 @@ public class MonthView extends LinearLayout {
           cellView.setClickable(!displayOnly);
 
           cellView.setSelectable(cell.isSelectable());
-          cellView.setSelected(cell.isSelected());
           cellView.setCurrentMonth(cell.isCurrentMonth());
+          cellView.setSelected(cell.isSelected());
           cellView.setToday(cell.isToday());
           cellView.setRangeState(cell.getRangeState());
           cellView.setHighlighted(cell.isHighlighted());
           cellView.setTag(cell);
-          
-          if (cell.isSelected()) {
+
+          if (cell.isSelected() && cell.getRangeState() != RangeState.MIDDLE) {
             cellView.getDayOfMonthTextView().setTypeface(ResourcesCompat.getFont(getContext(), R.font.inter_semibold_600));
           } else {
             cellView.getDayOfMonthTextView().setTypeface(ResourcesCompat.getFont(getContext(), R.font.inter_medium_500));

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-  <item android:state_selected="true" android:drawable="@drawable/bg_rounded_selected" />
-  <item android:state_selected="false" android:drawable="@drawable/bg_rounded_unselected" />
+<selector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+  <item android:state_selected="true" app:calendarvert_state_range_middle="false" android:drawable="@drawable/bg_selected_round" />
+  <item android:state_selected="false" app:calendarvert_state_range_middle="false" android:drawable="@drawable/bg_unselected" />
+  <item android:state_selected="true" app:calendarvert_state_range_middle="true" android:drawable="@drawable/bg_selected_range" />
 </selector>
