@@ -60,5 +60,5 @@
             android:textColor="@color/calendar_text_gray_light" />
 
     </you.thiago.calendarvertical.CalendarRowView>
-
+    
 </LinearLayout>

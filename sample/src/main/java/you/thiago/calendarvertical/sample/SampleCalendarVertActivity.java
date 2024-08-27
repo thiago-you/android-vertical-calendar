@@ -47,8 +47,9 @@ public class SampleCalendarVertActivity extends Activity {
         lastYear.add(Calendar.YEAR, -1);
 
         calendar = findViewById(R.id.calendar_view);
-        calendar.init(lastYear.getTime(), nextYear.getTime()) //
-                .inMode(CalendarPickerView.SelectionMode.SINGLE) //
+
+        calendar.init(lastYear.getTime(), nextYear.getTime())
+                .inMode(CalendarPickerView.SelectionMode.SINGLE) 
                 .withSelectedDate(new Date());
 
         initButtonListeners(nextYear, lastYear);
