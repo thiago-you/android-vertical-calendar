@@ -3,8 +3,7 @@ Android Calendar Vertical
 
 Standalone Android widget for picking dates from a calendar view in vertical layout.
 
-![Screenshot](screenshot.png)
-
+<img src="https://github.com/thiago-you/android-vertical-calendar/raw/master/screenshot.png" width="400">
 
 Usage
 -----
