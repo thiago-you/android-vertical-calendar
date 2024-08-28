@@ -214,6 +214,12 @@ public class MonthView extends LinearLayout {
             cellView.getDayOfMonthTextView()
                     .setTypeface(ResourcesCompat.getFont(getContext(), R.font.inter_medium_500));
         }
+        
+        if (!cell.isCurrentMonth()) {
+            cellView.setVisibility(View.INVISIBLE);
+        } else {
+            cellView.setVisibility(View.VISIBLE);
+        }
     }
 
     public void setDayBackground(int resId) {
