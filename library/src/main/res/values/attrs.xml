@@ -23,7 +23,7 @@
     <attr name="calendarvert_displayAlwaysDigitNumbers" format="boolean"/>
     <attr name="calendarvert_headerTextColor" format="color"/>
   </declare-styleable>
-  
+
   <declare-styleable name="calendar_cell">
     <attr name="calendarvert_state_selectable" format="boolean" />
     <attr name="calendarvert_state_current_month" format="boolean" />

@@ -455,14 +455,11 @@ public class CalendarPickerView extends ListView {
     }
 
     private void scrollToSelectedMonth(final int selectedIndex, final boolean smoothScroll) {
-        post(new Runnable() {
-            @Override
-            public void run() {
-                if (smoothScroll) {
-                    smoothScrollToPosition(selectedIndex);
-                } else {
-                    setSelection(selectedIndex);
-                }
+        post(() -> {
+            if (smoothScroll) {
+                smoothScrollToPosition(selectedIndex);
+            } else {
+                setSelection(selectedIndex);
             }
         });
     }
@@ -471,6 +468,7 @@ public class CalendarPickerView extends ListView {
         Integer selectedIndex = null;
         Integer todayIndex = null;
         Calendar today = Calendar.getInstance(timeZone, locale);
+
         for (int c = 0; c < months.size(); c++) {
             MonthDescriptor month = months.get(c);
             if (selectedIndex == null) {
@@ -480,11 +478,13 @@ public class CalendarPickerView extends ListView {
                         break;
                     }
                 }
+
                 if (selectedIndex == null && todayIndex == null && sameMonth(today, month)) {
                     todayIndex = c;
                 }
             }
         }
+
         if (selectedIndex != null) {
             scrollToSelectedMonth(selectedIndex);
         } else if (todayIndex != null) {
@@ -497,6 +497,7 @@ public class CalendarPickerView extends ListView {
 
         Calendar cal = Calendar.getInstance(timeZone, locale);
         cal.setTime(date);
+
         for (int c = 0; c < months.size(); c++) {
             MonthDescriptor month = months.get(c);
             if (sameMonth(cal, month)) {
@@ -504,10 +505,12 @@ public class CalendarPickerView extends ListView {
                 break;
             }
         }
+
         if (selectedIndex != null) {
             scrollToSelectedMonth(selectedIndex);
             return true;
         }
+
         return false;
     }
 
@@ -521,13 +524,9 @@ public class CalendarPickerView extends ListView {
         // Fix the layout height/width after the dialog has been shown.
         getLayoutParams().height = getMeasuredHeight();
         getLayoutParams().width = getMeasuredWidth();
+
         // Post this runnable so it runs _after_ the dimen changes have been applied/re-measured.
-        post(new Runnable() {
-            @Override
-            public void run() {
-                scrollToSelectedDates();
-            }
-        });
+        post(this::scrollToSelectedDates);
     }
 
     /**

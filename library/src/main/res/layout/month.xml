@@ -10,7 +10,8 @@
     <you.thiago.calendarvertical.CalendarGridView
         android:id="@+id/calendar_grid"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp">
 
         <you.thiago.calendarvertical.CalendarRowView
             android:id="@+id/day_names_header_row"
@@ -66,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inter_bold_700"
                 android:textColor="@color/calendar_text_gray_light" />
-            
+
         </you.thiago.calendarvertical.CalendarRowView>
 
         <include layout="@layout/week" />
@@ -80,7 +81,7 @@
         <include layout="@layout/week" />
 
         <include layout="@layout/week" />
-    
+
     </you.thiago.calendarvertical.CalendarGridView>
-    
+
 </you.thiago.calendarvertical.MonthView>
