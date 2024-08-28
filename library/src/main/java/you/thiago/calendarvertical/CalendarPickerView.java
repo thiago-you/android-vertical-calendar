@@ -465,6 +465,12 @@ public class CalendarPickerView extends ListView {
             monthsReverseOrder = monthsRevOrder;
             return this;
         }
+
+        public FluentInitializer withMonthsTitles(List<String> titles) {
+            adapter.setMonthTitles(titles);
+            validateAndUpdate();
+            return this;
+        }
     }
 
     private void validateAndUpdate() {
@@ -944,6 +950,7 @@ public class CalendarPickerView extends ListView {
     private class MonthAdapter extends BaseAdapter {
 
         private final LayoutInflater inflater;
+        private List<String> monthTitles;
 
         private MonthAdapter() {
             inflater = LayoutInflater.from(getContext());
@@ -970,9 +977,14 @@ public class CalendarPickerView extends ListView {
             return position;
         }
 
+        public void setMonthTitles(List<String> monthTitles) {
+            this.monthTitles = monthTitles;
+        }
+
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             MonthView monthView = (MonthView) convertView;
+
             if (monthView == null //
                 || !monthView.getTag(R.id.day_view_adapter_class).equals(dayViewAdapter.getClass())) {
                 monthView =
@@ -984,11 +996,20 @@ public class CalendarPickerView extends ListView {
             } else {
                 monthView.setDecorators(decorators);
             }
+
             if (monthsReverseOrder) {
                 position = months.size() - position - 1;
             }
-            monthView.init(months.get(position), cells.getValueAtIndex(position), displayOnly,
-                           titleTypeface, dateTypeface);
+            
+            monthView.init(
+                    months.get(position),
+                    cells.getValueAtIndex(position),
+                    displayOnly,
+                    titleTypeface,
+                    dateTypeface,
+                    monthTitles
+            );
+            
             return monthView;
         }
     }

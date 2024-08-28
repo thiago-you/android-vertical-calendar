@@ -1,6 +1,7 @@
 package you.thiago.calendarvertical;
 
 import static androidx.core.text.TextUtilsCompat.getLayoutDirectionFromLocale;
+import static java.util.Calendar.MONTH;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -53,7 +54,8 @@ public class MonthView extends LinearLayout {
             DateFormat weekdayNameFormat, Listener listener, Calendar today,
             int dayBackgroundResId, int dayTextColorResId, int titleTextStyle, boolean displayHeader,
             int headerTextColor, boolean displayDayNamesHeaderRowView, boolean displayDayNamesAsCalendarHeader,
-            boolean showAlwaysDigitNumbers, List<CalendarCellDecorator> decorators, Locale locale, DayViewAdapter adapter
+            boolean showAlwaysDigitNumbers, List<CalendarCellDecorator> decorators,
+            Locale locale, DayViewAdapter adapter
     ) {
         final MonthView view = (MonthView) inflater.inflate(R.layout.month, parent, false);
 
@@ -124,13 +126,9 @@ public class MonthView extends LinearLayout {
 
     public void init(
             MonthDescriptor month, List<List<MonthCellDescriptor>> cells,
-            boolean displayOnly, Typeface titleTypeface, Typeface dateTypeface
+            boolean displayOnly, Typeface titleTypeface, Typeface dateTypeface, List<String> monthTitles
     ) {
-        long start = System.currentTimeMillis();
-
-        String label = month.getLabel();
-        label = label.substring(0, 1).toUpperCase() + label.substring(1);
-        title.setText(label);
+        updateMonthTitle(month, monthTitles);
 
         NumberFormat numberFormatter;
         if (alwaysDigitNumbers) {
@@ -159,6 +157,27 @@ public class MonthView extends LinearLayout {
         if (dateTypeface != null) {
             grid.setTypeface(dateTypeface);
         }
+    }
+
+    public void updateMonthTitle(MonthDescriptor month, List<String> monthTitles) {
+        if (monthTitles != null && !monthTitles.isEmpty() && monthTitles.size() >= month.getMonth()) {
+            String monthTitle = monthTitles.get(month.getMonth());
+
+            if (monthTitle != null && !monthTitle.trim().isEmpty()) {
+                if (monthTitle.contains("%s")) {
+                    title.setText(String.format(monthTitle, month.getYear()));
+                } else {
+                    title.setText(monthTitle);
+                }
+            }
+
+            return;
+        }
+
+        String monthLabel = month.getLabel();
+        monthLabel = monthLabel.substring(0, 1).toUpperCase() + monthLabel.substring(1);
+
+        title.setText(monthLabel);
     }
 
     private void configCalendarRows(
