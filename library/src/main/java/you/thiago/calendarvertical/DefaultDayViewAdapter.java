@@ -4,8 +4,6 @@ import android.view.ContextThemeWrapper;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import you.thiago.calendarvert.R;
-
 import static android.view.Gravity.CENTER_VERTICAL;
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;

@@ -28,7 +28,6 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 import androidx.core.content.ContextCompat;
-import you.thiago.calendarvert.R;
 
 import static java.util.Calendar.DATE;
 import static java.util.Calendar.DAY_OF_MONTH;

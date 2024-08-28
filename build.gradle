@@ -6,6 +6,12 @@ project.ext {
   versionName = "0.1"
 }
 
+wrapper {
+  // if you change this version you will need to run the 'gradlew wrapper' command twice
+  // from the command line to auto update the gradle cache
+  gradleVersion = "7.4.2"
+}
+
 buildscript {
   ext {
     kotlin_version = '1.8.20'
@@ -18,7 +24,7 @@ buildscript {
 
   dependencies {
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    classpath 'com.android.tools.build:gradle:8.1.4'
+    classpath 'com.android.tools.build:gradle:7.4.2'
   }
 }
 

@@ -14,7 +14,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.core.content.res.ResourcesCompat;
-import you.thiago.calendarvert.R;
 
 import java.text.DateFormat;
 import java.text.NumberFormat;

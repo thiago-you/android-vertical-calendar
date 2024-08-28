@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-  namespace "you.thiago.calendarvert"
+  namespace "you.thiago.calendarvertical"
 
   compileSdk rootProject.ext.targetSdkVersion
 

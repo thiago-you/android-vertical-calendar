@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.Locale;
 
 import androidx.core.content.ContextCompat;
-import you.thiago.calendarvert.R;
 
 import static androidx.core.text.TextUtilsCompat.getLayoutDirectionFromLocale;
 
