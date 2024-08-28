@@ -48,11 +48,19 @@ public class SampleCalendarVertActivity extends Activity {
         lastYear.add(Calendar.YEAR, -1);
 
         calendar = ((CalendarVertical) findViewById(R.id.calendar_vertical)).getInstance();
-        
-        calendar.init(lastYear.getTime(), nextYear.getTime())
-                .inMode(CalendarPickerView.SelectionMode.SINGLE) 
-                .withSelectedDate(new Date());
 
+        Calendar today = Calendar.getInstance();
+        ArrayList<Date> dates = new ArrayList<>();
+        
+        today.add(Calendar.DATE, 3);
+        dates.add(today.getTime());
+        
+        today.add(Calendar.DATE, 5);
+        dates.add(today.getTime());
+        
+        calendar.build()
+                .withSelectedDates(dates);
+        
         initButtonListeners(nextYear, lastYear);
     }
 
@@ -72,6 +80,22 @@ public class SampleCalendarVertActivity extends Activity {
 
         modeButtons.addAll(Arrays.asList(single, multi, range, displayOnly, decorator, customView));
 
+        range.setOnClickListener(v -> {
+            setButtonsEnabled(range);
+
+            calendar.setCustomDayView(new DefaultDayViewAdapter());
+            Calendar today = Calendar.getInstance();
+            ArrayList<Date> dates = new ArrayList<>();
+            today.add(Calendar.DATE, 3);
+            dates.add(today.getTime());
+            today.add(Calendar.DATE, 5);
+            dates.add(today.getTime());
+            calendar.setDecorators(Collections.emptyList());
+            calendar.init(new Date(), nextYear.getTime()) //
+                    .inMode(CalendarPickerView.SelectionMode.RANGE) //
+                    .withSelectedDates(dates);
+        });
+        
         single.setOnClickListener(v -> {
             setButtonsEnabled(single);
 
@@ -120,22 +144,6 @@ public class SampleCalendarVertActivity extends Activity {
                     .withSelectedDate(c.getTime());
 
             calendar.highlightDates(getHighlightedDaysForMonth(c.get(Calendar.MONTH)));
-        });
-
-        range.setOnClickListener(v -> {
-            setButtonsEnabled(range);
-
-            calendar.setCustomDayView(new DefaultDayViewAdapter());
-            Calendar today = Calendar.getInstance();
-            ArrayList<Date> dates = new ArrayList<>();
-            today.add(Calendar.DATE, 3);
-            dates.add(today.getTime());
-            today.add(Calendar.DATE, 5);
-            dates.add(today.getTime());
-            calendar.setDecorators(Collections.emptyList());
-            calendar.init(new Date(), nextYear.getTime()) //
-                    .inMode(CalendarPickerView.SelectionMode.RANGE) //
-                    .withSelectedDates(dates);
         });
 
         displayOnly.setOnClickListener(v -> {
@@ -204,8 +212,6 @@ public class SampleCalendarVertActivity extends Activity {
             String toast = "Selected: " + calendar.getSelectedDate().getTime();
             Toast.makeText(SampleCalendarVertActivity.this, toast, LENGTH_SHORT).show();
         });
-
-        range.performClick();
     }
 
     private void showCalendarInDialog(String title, int layoutResId) {

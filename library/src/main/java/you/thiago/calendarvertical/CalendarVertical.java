@@ -1,7 +1,6 @@
 package you.thiago.calendarvertical;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -47,7 +46,9 @@ public class CalendarVertical extends LinearLayout {
             boolean displayDayNamesHeaderRow = a.getBoolean(R.styleable.CalendarPickerView_calendarpicker_displayDayNamesHeaderRow, false);
             boolean displayDayNamesAsCalendarHeader = a.getBoolean(R.styleable.CalendarVertical_calendarvert_displayDayNamesAsCalendarHeader, true);
             boolean displayAlwaysDigitNumbers = a.getBoolean(R.styleable.CalendarPickerView_calendarpicker_displayAlwaysDigitNumbers, false);
-
+            boolean autoInit = a.getBoolean(R.styleable.CalendarPickerView_calendarpicker_autoInit, true);
+            int initialMode = a.getInt(R.styleable.CalendarPickerView_calendarpicker_mode, 0);
+            
             setupWeekDaysHeader(context, displayDayNamesAsCalendarHeader);
 
             calendar = new CalendarPickerView(
@@ -62,10 +63,45 @@ public class CalendarVertical extends LinearLayout {
                     headerTextColor,
                     displayDayNamesHeaderRow,
                     displayDayNamesAsCalendarHeader,
-                    displayAlwaysDigitNumbers
+                    displayAlwaysDigitNumbers,
+                    autoInit,
+                    initialMode
             );
     
             view.addView(calendar);
+        }
+    }
+
+    /**
+     * Return CalendarPickerView fluent initializer instance (builder)
+     */
+    public CalendarPickerView getInstance() {
+        return calendar;
+    }
+
+    /**
+     * Return CalendarPickerView fluent initializer instance (builder)
+     */
+    public CalendarPickerView.FluentInitializer build() {
+        return calendar.build();
+    }
+
+    public void setWeekDaysNames(List<String> weekDaysNames) {
+        if (weekDaysNames.size() != 7) {
+            throw new IllegalArgumentException("Week days names must have 7 elements");
+        }
+
+        for (int i = 0; i < weekDaysNames.size(); i++) {
+            final TextView textView = (TextView) rowViewWeekDaysHeader.getChildAt(i);
+
+            String dayName = weekDaysNames.get(i);
+
+            dayName = dayName.substring(0, 1).toUpperCase() + dayName.substring(1);
+            dayName = dayName.replace(".", "")
+                             .replace(",", "")
+                             .trim();
+
+            textView.setText(dayName);
         }
     }
 
@@ -90,30 +126,7 @@ public class CalendarVertical extends LinearLayout {
             rowViewWeekDaysHeader.setVisibility(View.GONE);
         }
     }
-
-    public CalendarPickerView getInstance() {
-        return calendar;
-    }
-
-    public void setWeekDaysNames(List<String> weekDaysNames) {
-        if (weekDaysNames.size() != 7) {
-            throw new IllegalArgumentException("Week days names must have 7 elements");
-        }
-
-        for (int i = 0; i < weekDaysNames.size(); i++) {
-            final TextView textView = (TextView) rowViewWeekDaysHeader.getChildAt(i);
-
-            String dayName = weekDaysNames.get(i);
-
-            dayName = dayName.substring(0, 1).toUpperCase() + dayName.substring(1);
-            dayName = dayName.replace(".", "")
-                             .replace(",", "")
-                             .trim();
-
-            textView.setText(dayName);
-        }
-    }
-
+    
     private int getDayOfWeek(int firstDayOfWeek, int offset, boolean isRtl) {
         int dayOfWeek = firstDayOfWeek + offset;
 

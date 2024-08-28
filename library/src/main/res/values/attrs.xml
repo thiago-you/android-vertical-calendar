@@ -9,7 +9,13 @@
     <attr name="calendarpicker_displayDayNamesHeaderRow" format="boolean"/>
     <attr name="calendarpicker_displayDayNamesAsCalendarHeader" format="boolean"/>
     <attr name="calendarpicker_displayAlwaysDigitNumbers" format="boolean"/>
+    <attr name="calendarpicker_autoInit" format="boolean"/>
     <attr name="calendarpicker_headerTextColor" format="color"/>
+    <attr name="calendarpicker_mode" format="enum">
+        <enum name="range" value="0"/>
+        <enum name="single" value="1"/>
+        <enum name="multiple" value="2"/>
+    </attr>
   </declare-styleable>
 
   <declare-styleable name="CalendarVertical">
@@ -21,7 +27,13 @@
     <attr name="calendarvert_displayDayNamesHeaderRow" format="boolean"/>
     <attr name="calendarvert_displayDayNamesAsCalendarHeader" format="boolean"/>
     <attr name="calendarvert_displayAlwaysDigitNumbers" format="boolean"/>
+    <attr name="calendarvert_autoInit" format="boolean"/>
     <attr name="calendarvert_headerTextColor" format="color"/>
+    <attr name="calendarvert_mode" format="enum">
+      <enum name="range" value="0"/>
+      <enum name="single" value="1"/>
+      <enum name="multiple" value="2"/>
+    </attr>
   </declare-styleable>
 
   <declare-styleable name="calendar_cell">
