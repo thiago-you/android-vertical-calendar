@@ -11,6 +11,7 @@
     <attr name="calendarpicker_displayAlwaysDigitNumbers" format="boolean"/>
     <attr name="calendarpicker_headerTextColor" format="color"/>
     <attr name="calendarpicker_autoInit" format="boolean"/>
+    <attr name="calendarpicker_months_title" format="reference"/>
     <attr name="calendarpicker_mode" format="enum">
         <enum name="range" value="0"/>
         <enum name="single" value="1"/>
@@ -29,6 +30,7 @@
     <attr name="calendarvert_displayAlwaysDigitNumbers" format="boolean"/>
     <attr name="calendarvert_headerTextColor" format="color"/>
     <attr name="calendarvert_autoInit" format="boolean"/>
+    <attr name="calendarvert_months_title" format="reference"/>
     <attr name="calendarvert_mode" format="enum">
       <enum name="range" value="0"/>
       <enum name="single" value="1"/>

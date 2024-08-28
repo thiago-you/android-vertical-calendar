@@ -104,6 +104,7 @@ public class CalendarPickerView extends ListView {
     private int initialMode;
     private Typeface titleTypeface;
     private Typeface dateTypeface;
+    private List<String> monthsTitle;
 
     private OnDateSelectedListener dateListener;
     private DateSelectableFilter dateConfiguredListener;
@@ -147,7 +148,15 @@ public class CalendarPickerView extends ListView {
             displayAlwaysDigitNumbers = a.getBoolean(R.styleable.CalendarPickerView_calendarpicker_displayAlwaysDigitNumbers, false);
             autoInit = a.getBoolean(R.styleable.CalendarPickerView_calendarpicker_autoInit, true);
             initialMode = a.getInt(R.styleable.CalendarPickerView_calendarpicker_mode, 0);
-         
+
+            int monthsTitleResId = a.getResourceId(R.styleable.CalendarVertical_calendarvert_months_title, 0);
+
+            monthsTitle = new ArrayList<>();
+
+            if (monthsTitleResId != 0) {
+                Collections.addAll(monthsTitle, getResources().getStringArray(monthsTitleResId));
+            }
+
             adapter = new MonthAdapter();
         
             setupView(context, bg);
@@ -158,7 +167,7 @@ public class CalendarPickerView extends ListView {
             CalendarVertical calendarVertical, Context context, AttributeSet attrs, int bg, int dayBackgroundResId,
             int dayTextColorResId, int titleTextStyle, boolean displayHeader, int headerTextColor,
             boolean displayDayNamesHeaderRow, boolean displayDayNamesAsCalendarHeader,
-            boolean displayAlwaysDigitNumbers, boolean autoInit, int initialMode
+            boolean displayAlwaysDigitNumbers, boolean autoInit, int initialMode, List<String> monthsTitle
     ) {
         super(context, attrs);
         
@@ -173,6 +182,7 @@ public class CalendarPickerView extends ListView {
         this.displayAlwaysDigitNumbers = displayAlwaysDigitNumbers;
         this.autoInit = autoInit;
         this.initialMode = initialMode;
+        this.monthsTitle = monthsTitle;
 
         adapter = new MonthAdapter();
 
@@ -197,6 +207,10 @@ public class CalendarPickerView extends ListView {
         fullDateFormat.setTimeZone(timeZone);
 
         if (autoInit) {
+            if (monthsTitle != null && !monthsTitle.isEmpty()) {
+                adapter.setMonthsTitle(monthsTitle);
+            }
+            
             Calendar nextYear = Calendar.getInstance(timeZone, locale);
             nextYear.add(Calendar.YEAR, 1);
 
@@ -466,8 +480,8 @@ public class CalendarPickerView extends ListView {
             return this;
         }
 
-        public FluentInitializer withMonthsTitles(List<String> titles) {
-            adapter.setMonthTitles(titles);
+        public FluentInitializer withMonthsTitle(List<String> titles) {
+            adapter.setMonthsTitle(titles);
             validateAndUpdate();
             return this;
         }
@@ -950,7 +964,7 @@ public class CalendarPickerView extends ListView {
     private class MonthAdapter extends BaseAdapter {
 
         private final LayoutInflater inflater;
-        private List<String> monthTitles;
+        private List<String> monthsTitle;
 
         private MonthAdapter() {
             inflater = LayoutInflater.from(getContext());
@@ -977,8 +991,8 @@ public class CalendarPickerView extends ListView {
             return position;
         }
 
-        public void setMonthTitles(List<String> monthTitles) {
-            this.monthTitles = monthTitles;
+        public void setMonthsTitle(List<String> monthsTitle) {
+            this.monthsTitle = monthsTitle;
         }
 
         @Override
@@ -1007,7 +1021,7 @@ public class CalendarPickerView extends ListView {
                     displayOnly,
                     titleTypeface,
                     dateTypeface,
-                    monthTitles
+                    monthsTitle
             );
             
             return monthView;

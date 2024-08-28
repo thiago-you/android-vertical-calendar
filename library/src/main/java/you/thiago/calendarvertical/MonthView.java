@@ -126,9 +126,9 @@ public class MonthView extends LinearLayout {
 
     public void init(
             MonthDescriptor month, List<List<MonthCellDescriptor>> cells,
-            boolean displayOnly, Typeface titleTypeface, Typeface dateTypeface, List<String> monthTitles
+            boolean displayOnly, Typeface titleTypeface, Typeface dateTypeface, List<String> monthsTitle
     ) {
-        updateMonthTitle(month, monthTitles);
+        updateMonthTitle(month, monthsTitle);
 
         NumberFormat numberFormatter;
         if (alwaysDigitNumbers) {
@@ -159,9 +159,9 @@ public class MonthView extends LinearLayout {
         }
     }
 
-    public void updateMonthTitle(MonthDescriptor month, List<String> monthTitles) {
-        if (monthTitles != null && !monthTitles.isEmpty() && monthTitles.size() >= month.getMonth()) {
-            String monthTitle = monthTitles.get(month.getMonth());
+    public void updateMonthTitle(MonthDescriptor month, List<String> monthsTitle) {
+        if (monthsTitle != null && !monthsTitle.isEmpty() && monthsTitle.size() >= month.getMonth()) {
+            String monthTitle = monthsTitle.get(month.getMonth());
 
             if (monthTitle != null && !monthTitle.trim().isEmpty()) {
                 if (monthTitle.contains("%s")) {

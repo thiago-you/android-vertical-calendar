@@ -12,6 +12,7 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -47,7 +48,13 @@ public class CalendarVertical extends LinearLayout {
             boolean displayDayNamesAsCalendarHeader = a.getBoolean(R.styleable.CalendarVertical_calendarvert_displayDayNamesAsCalendarHeader, true);
             boolean displayAlwaysDigitNumbers = a.getBoolean(R.styleable.CalendarPickerView_calendarpicker_displayAlwaysDigitNumbers, false);
             boolean autoInit = a.getBoolean(R.styleable.CalendarPickerView_calendarpicker_autoInit, true);
-            int initialMode = a.getInt(R.styleable.CalendarPickerView_calendarpicker_mode, 0);
+            int initialMode = a.getInt(R.styleable.CalendarVertical_calendarvert_mode, 0);
+            int monthsTitleResId = a.getResourceId(R.styleable.CalendarVertical_calendarvert_months_title, 0);
+            
+            List<String> monthsTitle = new ArrayList<>();
+            if (monthsTitleResId != 0) {
+                Collections.addAll(monthsTitle, getResources().getStringArray(monthsTitleResId));
+            }
             
             setupWeekDaysHeader(context, displayDayNamesAsCalendarHeader);
 
@@ -65,7 +72,8 @@ public class CalendarVertical extends LinearLayout {
                     displayDayNamesAsCalendarHeader,
                     displayAlwaysDigitNumbers,
                     autoInit,
-                    initialMode
+                    initialMode,
+                    monthsTitle
             );
     
             view.addView(calendar);

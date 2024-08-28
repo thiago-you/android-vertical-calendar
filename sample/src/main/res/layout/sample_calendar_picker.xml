@@ -115,6 +115,7 @@
         android:paddingRight="8dp"
         android:background="#FFFFFF"
         android:clipToPadding="false"
+        app:calendarvert_months_title="@array/months_array"
         android:scrollbarStyle="outsideOverlay" />
     
     <Button
