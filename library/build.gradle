@@ -33,10 +33,4 @@ android {
 dependencies {
   implementation rootProject.ext.androidXCore
   implementation rootProject.ext.appCompat
-  implementation rootProject.ext.annotations
-
-  testImplementation rootProject.ext.junit
-  testImplementation rootProject.ext.robolectric
-  testImplementation rootProject.ext.intellijannotations
-  testImplementation rootProject.ext.truth
 }

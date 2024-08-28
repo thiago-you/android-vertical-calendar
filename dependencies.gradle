@@ -1,15 +1,6 @@
 ext {
   androidXCore = 'androidx.core:core:1.13.1'
-  annotations = 'androidx.annotation:annotation:1.8.2'
   appCompat = 'androidx.appcompat:appcompat:1.7.0'
-
-  // Other
-  robolectric = 'org.robolectric:robolectric:4.13'
-  intellijannotations = 'org.jetbrains:annotations:24.1.0'
-  truth = 'com.google.truth:truth:1.4.4'
-
-  // Test
-  junit = "junit:junit:4.13.2"
 
   sourceCompatibilityVersion = JavaVersion.VERSION_17
   targetCompatibilityVersion = JavaVersion.VERSION_17
