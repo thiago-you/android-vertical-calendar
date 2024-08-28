@@ -27,6 +27,9 @@ layout or a dialog is a better choice.
 In the `onCreate` of your activity/dialog or the `onCreateView` of your fragment, initialize the
 view with a range of valid dates as well as the currently selected date.
 
+If the Calendar instance was not explicitly initialized, it will be **auto init** into **Rage mode** with one year from current date as min and max dates.
+Auto init mode can be disabled direct on XML layout with `app:calendarvert_autoInit="false"` and Range mode can be set on XML with `app:calendarvert_mode="single"`.
+
 ```kotlin
 val calendar = findViewById<CalendarPickerView>(R.id.calendar_view)
 
@@ -44,8 +47,24 @@ calendar.init(Date(), nextYear.getTime())
         .withSelectedDates(dates)
 ```
 
-The default mode of the view is to have one selectable date.  If you want the user to be able to
-select multiple dates or a date range, use the inMode() method:
+To setup the calendar instance without explicit initialization, you can use the following code:
+
+```kotlin
+val calendar = findViewById<CalendarPickerView>(R.id.calendar_view)
+
+val today = Calendar.getInstance()
+val dates = ArrayList<Date>()
+
+today.add(Calendar.DATE, 3)
+dates.add(today.time)
+
+today.add(Calendar.DATE, 5)
+dates.add(today.time)
+
+calendar.build()
+        .inMode(CalendarPickerView.SelectionMode.RANGE)
+        .withSelectedDates(dates)
+```
 
 ## Installation
 

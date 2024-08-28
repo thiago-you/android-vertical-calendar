@@ -9,25 +9,25 @@ import you.thiago.calendarvert.R;
 
 public class CalendarCellView extends FrameLayout {
   private static final int[] STATE_SELECTABLE = {
-      R.attr.calendarvert_state_selectable
+      R.attr.calendarcellview_state_selectable
   };
   private static final int[] STATE_CURRENT_MONTH = {
-      R.attr.calendarvert_state_current_month
+      R.attr.calendarcellview_state_current_month
   };
   private static final int[] STATE_TODAY = {
-      R.attr.calendarvert_state_today
+      R.attr.calendarcellview_state_today
   };
   private static final int[] STATE_HIGHLIGHTED = {
-      R.attr.calendarvert_state_highlighted
+      R.attr.calendarcellview_state_highlighted
   };
   private static final int[] STATE_RANGE_FIRST = {
-      R.attr.calendarvert_state_range_first
+      R.attr.calendarcellview_state_range_first
   };
   private static final int[] STATE_RANGE_MIDDLE = {
-      R.attr.calendarvert_state_range_middle
+      R.attr.calendarcellview_state_range_middle
   };
   private static final int[] STATE_RANGE_LAST = {
-      R.attr.calendarvert_state_range_last
+      R.attr.calendarcellview_state_range_last
   };
 
   private boolean isSelectable = false;

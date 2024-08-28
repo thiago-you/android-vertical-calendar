@@ -9,8 +9,8 @@
     <attr name="calendarpicker_displayDayNamesHeaderRow" format="boolean"/>
     <attr name="calendarpicker_displayDayNamesAsCalendarHeader" format="boolean"/>
     <attr name="calendarpicker_displayAlwaysDigitNumbers" format="boolean"/>
-    <attr name="calendarpicker_autoInit" format="boolean"/>
     <attr name="calendarpicker_headerTextColor" format="color"/>
+    <attr name="calendarpicker_autoInit" format="boolean"/>
     <attr name="calendarpicker_mode" format="enum">
         <enum name="range" value="0"/>
         <enum name="single" value="1"/>
@@ -27,8 +27,8 @@
     <attr name="calendarvert_displayDayNamesHeaderRow" format="boolean"/>
     <attr name="calendarvert_displayDayNamesAsCalendarHeader" format="boolean"/>
     <attr name="calendarvert_displayAlwaysDigitNumbers" format="boolean"/>
-    <attr name="calendarvert_autoInit" format="boolean"/>
     <attr name="calendarvert_headerTextColor" format="color"/>
+    <attr name="calendarvert_autoInit" format="boolean"/>
     <attr name="calendarvert_mode" format="enum">
       <enum name="range" value="0"/>
       <enum name="single" value="1"/>
@@ -37,12 +37,12 @@
   </declare-styleable>
 
   <declare-styleable name="calendar_cell">
-    <attr name="calendarvert_state_selectable" format="boolean" />
-    <attr name="calendarvert_state_current_month" format="boolean" />
-    <attr name="calendarvert_state_today" format="boolean" />
-    <attr name="calendarvert_state_range_first" format="boolean" />
-    <attr name="calendarvert_state_range_middle" format="boolean" />
-    <attr name="calendarvert_state_range_last" format="boolean" />
-    <attr name="calendarvert_state_highlighted" format="boolean" />
+    <attr name="calendarcellview_state_selectable" format="boolean" />
+    <attr name="calendarcellview_state_current_month" format="boolean" />
+    <attr name="calendarcellview_state_today" format="boolean" />
+    <attr name="calendarcellview_state_range_first" format="boolean" />
+    <attr name="calendarcellview_state_range_middle" format="boolean" />
+    <attr name="calendarcellview_state_range_last" format="boolean" />
+    <attr name="calendarcellview_state_highlighted" format="boolean" />
   </declare-styleable>
 </resources>
