@@ -4,4 +4,7 @@
   <dimen name="calendar_month_title_bottommargin">4dp</dimen>
   <dimen name="calendar_text_medium">18sp</dimen>
   <dimen name="calendar_text_small">14sp</dimen>
+  <dimen name="calendar_top_padding">32dp</dimen>
+  <dimen name="calendar_month_title_padding">24dp</dimen>
+  <dimen name="calendar_week_header_padding">24dp</dimen>
 </resources>

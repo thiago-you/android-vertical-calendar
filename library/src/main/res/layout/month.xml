@@ -2,7 +2,7 @@
 <you.thiago.calendarvertical.MonthView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="32dp"
+    android:paddingBottom="@dimen/calendar_top_padding"
     android:orientation="vertical">
 
     <!-- This is the place where the month title is added -->
@@ -11,64 +11,9 @@
         android:id="@+id/calendar_grid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp">
+        android:layout_marginTop="@dimen/calendar_month_title_padding">
 
-        <you.thiago.calendarvertical.CalendarRowView
-            android:id="@+id/day_names_header_row"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/calendar_day_headers_paddingbottom">
-
-            <TextView
-                style="@style/CalendarCell.DayHeader"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/inter_bold_700"
-                android:textColor="@color/calendar_text_gray_light" />
-
-            <TextView
-                style="@style/CalendarCell.DayHeader"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/inter_medium_500"
-                android:textColor="@color/calendar_text_gray_light" />
-
-            <TextView
-                style="@style/CalendarCell.DayHeader"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/inter_medium_500"
-                android:textColor="@color/calendar_text_gray_light" />
-
-            <TextView
-                style="@style/CalendarCell.DayHeader"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/inter_medium_500"
-                android:textColor="@color/calendar_text_gray_light" />
-
-            <TextView
-                style="@style/CalendarCell.DayHeader"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/inter_medium_500"
-                android:textColor="@color/calendar_text_gray_light" />
-
-            <TextView
-                style="@style/CalendarCell.DayHeader"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/inter_medium_500"
-                android:textColor="@color/calendar_text_gray_light" />
-
-            <TextView
-                style="@style/CalendarCell.DayHeader"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/inter_bold_700"
-                android:textColor="@color/calendar_text_gray_light" />
-
-        </you.thiago.calendarvertical.CalendarRowView>
+        <include layout="@layout/week_days_header" />
 
         <include layout="@layout/week" />
 
