@@ -3,17 +3,17 @@
     <item name="android:textSize">@dimen/calendar_text_medium</item>
     <item name="android:textStyle">bold</item>
     <item name="android:gravity">center_horizontal</item>
-    <item name="android:paddingBottom">@dimen/calendar_month_title_bottommargin</item>
-    <item name="android:paddingTop">@dimen/calendar_month_topmargin</item>
+    <item name="android:paddingBottom">@dimen/calendar_month_title_bottom_margin</item>
+    <item name="android:paddingTop">@dimen/calendar_month_top_margin</item>
     <item name="android:textColor">@color/calendar_text_gray</item>
-    <item name="android:fontFamily">@font/inter_bold_700</item>
+    <item name="android:fontFamily">@font/calendar_title_bold</item>
   </style>
 
   <style name="CalendarCell">
     <item name="android:layout_width">0dp</item>
     <item name="android:layout_weight">1</item>
     <item name="android:gravity">center</item>
-    <item name="android:textAlignment" tools:targetApi="jelly_bean_mr1">center</item>
+    <item name="android:textAlignment">center</item>
   </style>
 
   <style name="CalendarCell.DayHeader">

@@ -209,10 +209,10 @@ public class MonthView extends LinearLayout {
 
         if (cell.isSelected() && cell.getRangeState() != RangeState.MIDDLE) {
             cellView.getDayOfMonthTextView()
-                    .setTypeface(ResourcesCompat.getFont(getContext(), R.font.inter_semibold_600));
+                    .setTypeface(ResourcesCompat.getFont(getContext(), R.font.calendar_days_semibold));
         } else {
             cellView.getDayOfMonthTextView()
-                    .setTypeface(ResourcesCompat.getFont(getContext(), R.font.inter_medium_500));
+                    .setTypeface(ResourcesCompat.getFont(getContext(), R.font.calendar_days_medium));
         }
         
         if (!cell.isCurrentMonth()) {

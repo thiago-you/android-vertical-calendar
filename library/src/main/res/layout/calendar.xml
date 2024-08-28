@@ -14,49 +14,49 @@
             style="@style/CalendarCell.DayHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/inter_bold_700"
+            android:fontFamily="@font/weekend_days_bold"
             android:textColor="@color/calendar_text_gray_light" />
 
         <TextView
             style="@style/CalendarCell.DayHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/inter_medium_500"
+            android:fontFamily="@font/week_days_medium"
             android:textColor="@color/calendar_text_gray_light" />
 
         <TextView
             style="@style/CalendarCell.DayHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/inter_medium_500"
+            android:fontFamily="@font/week_days_medium"
             android:textColor="@color/calendar_text_gray_light" />
 
         <TextView
             style="@style/CalendarCell.DayHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/inter_medium_500"
+            android:fontFamily="@font/week_days_medium"
             android:textColor="@color/calendar_text_gray_light" />
 
         <TextView
             style="@style/CalendarCell.DayHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/inter_medium_500"
+            android:fontFamily="@font/week_days_medium"
             android:textColor="@color/calendar_text_gray_light" />
 
         <TextView
             style="@style/CalendarCell.DayHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/inter_medium_500"
+            android:fontFamily="@font/week_days_medium"
             android:textColor="@color/calendar_text_gray_light" />
 
         <TextView
             style="@style/CalendarCell.DayHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/inter_bold_700"
+            android:fontFamily="@font/weekend_days_bold"
             android:textColor="@color/calendar_text_gray_light" />
 
     </you.thiago.calendarvertical.CalendarRowView>
