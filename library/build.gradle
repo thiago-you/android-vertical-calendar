@@ -25,6 +25,10 @@ android {
     targetCompatibility rootProject.ext.targetCompatibilityVersion
   }
 
+  kotlinOptions {
+    jvmTarget = rootProject.ext.targetCompatibilityVersion
+  }
+  
   lintOptions {
     abortOnError false
   }
