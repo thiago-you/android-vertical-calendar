@@ -2,6 +2,6 @@ ext {
   androidXCore = 'androidx.core:core:1.10.1'
   appCompat = 'androidx.appcompat:appcompat:1.6.1'
 
-  sourceCompatibilityVersion = JavaVersion.VERSION_11
-  targetCompatibilityVersion = JavaVersion.VERSION_11
+  sourceCompatibilityVersion = JavaVersion.VERSION_17
+  targetCompatibilityVersion = JavaVersion.VERSION_17
 }
