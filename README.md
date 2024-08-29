@@ -1,3 +1,5 @@
+[![](https://jitpack.io/v/thiago-you/android-vertical-calendar.svg)](https://jitpack.io/#thiago-you/android-vertical-calendar)
+
 Android Calendar Vertical
 ==========================
 
