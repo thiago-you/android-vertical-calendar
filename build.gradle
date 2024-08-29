@@ -3,7 +3,9 @@ project.ext {
   minSdkVersion = 21
   targetSdkVersion = 34
   versionCode = 1
-  versionName = "0.1"
+  versionName = '0.1'
+  name = 'calendar-vertical'
+  namespace = 'you.thiago.calendarvertical'
 }
 
 wrapper {

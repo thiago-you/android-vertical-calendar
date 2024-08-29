@@ -1,10 +1,11 @@
 plugins {
   id 'com.android.library'
   id 'kotlin-android'
+  id 'maven-publish'
 }
 
 android {
-  namespace "you.thiago.calendarvertical"
+  namespace rootProject.ext.namespace
 
   compileSdk rootProject.ext.targetSdkVersion
 
@@ -37,4 +38,17 @@ android {
 dependencies {
   implementation rootProject.ext.androidXCore
   implementation rootProject.ext.appCompat
+}
+
+publishing {
+  publications {
+    release(MavenPublication) {
+      afterEvaluate {
+        from components.release
+      }
+      groupId = rootProject.ext.namespace
+      artifactId = rootProject.ext.name
+      version = rootProject.ext.versionName
+    }
+  }
 }
