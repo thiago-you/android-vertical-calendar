@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.text.DateFormatSymbols;
@@ -1220,18 +1219,13 @@ public class CalendarPickerView extends ListView {
      * @see #setCellClickInterceptor(CellClickInterceptor)
      */
     public interface CellClickInterceptor {
-
         boolean onCellClicked(Date date);
     }
 
-    private class DefaultOnInvalidDateSelectedListener implements OnInvalidDateSelectedListener {
-
+    private static class DefaultOnInvalidDateSelectedListener implements OnInvalidDateSelectedListener {
         @Override
         public void onInvalidDateSelected(Date date) {
-            String errMessage =
-                    getResources().getString(R.string.invalid_date, fullDateFormat.format(minCal.getTime()),
-                                             fullDateFormat.format(maxCal.getTime()));
-            Toast.makeText(getContext(), errMessage, Toast.LENGTH_SHORT).show();
+            // No default behavior. Nothing happens.
         }
     }
 }

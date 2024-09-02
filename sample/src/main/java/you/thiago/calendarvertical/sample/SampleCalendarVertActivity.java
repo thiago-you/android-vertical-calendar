@@ -215,16 +215,20 @@ public class SampleCalendarVertActivity extends Activity {
     }
 
     private void showCalendarInDialog(String title, int layoutResId) {
-        dialogView = (CalendarPickerView) getLayoutInflater().inflate(layoutResId, null, false);
+        CalendarVertical calendarVertical = (CalendarVertical) getLayoutInflater().inflate(layoutResId, null, false);
+
+
+        dialogView = calendarVertical.getInstance();
+        
         theDialog = new AlertDialog.Builder(this) //
                                                   .setTitle(title)
-                                                  .setView(dialogView)
+                                                  .setView(calendarVertical)
                                                   .setNeutralButton("Dismiss",
                                                                     (dialogInterface, i) -> dialogInterface.dismiss())
                                                   .create();
         theDialog.setOnShowListener(dialogInterface -> {
             Log.d(TAG, "onShow: fix the dimens!");
-            dialogView.fixDialogDimens();
+            //dialogView.fixDialogDimens();
         });
         theDialog.show();
     }
