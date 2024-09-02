@@ -19,50 +19,97 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import androidx.asynclayoutinflater.view.AsyncLayoutInflater;
 import androidx.core.content.ContextCompat;
 
 import static androidx.core.text.TextUtilsCompat.getLayoutDirectionFromLocale;
 
 public class CalendarVertical extends LinearLayout {
 
-    private final CalendarPickerView calendar;
+    private ViewGroup calendarContainer;
+    private CalendarPickerView calendar;
+    
     private final CalendarRowView rowViewWeekDaysHeader;
+
+    private final int bg;
+    private final int dayBackgroundResId;
+    private final int dayTextColorResId;
+    private final int titleTextStyle;
+    private final int headerTextColor;
+    private final boolean displayHeader;
+    private final boolean displayDayNamesHeaderRow;
+    private final boolean displayDayNamesAsCalendarHeader;
+    private final boolean displayAlwaysDigitNumbers;
+    private final boolean autoInit;
+    private final int initialMode;
+    private final int monthsTitleResId;
+
+    private final List<String> monthsTitle = new ArrayList<>();
     
     public CalendarVertical(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        final ViewGroup view = (ViewGroup) LayoutInflater.from(context).inflate(R.layout.calendar_vertical, this, false);
+        calendarContainer = (ViewGroup) LayoutInflater.from(context).inflate(R.layout.calendar_vertical, this, false);
         
-        addView(view);
+        addView(calendarContainer);
         
-        rowViewWeekDaysHeader = view.findViewById(R.id.day_names_header_row);
+        rowViewWeekDaysHeader = calendarContainer.findViewById(R.id.day_names_header_row);
         
         try (TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CalendarVertical)) {
-            final int bg = a.getColor(R.styleable.CalendarPickerView_android_background, ContextCompat.getColor(context, R.color.calendar_bg));
+            bg = a.getColor(R.styleable.CalendarPickerView_android_background, ContextCompat.getColor(context, R.color.calendar_bg));
+            dayBackgroundResId = a.getResourceId(R.styleable.CalendarPickerView_calendarpicker_dayBackground, R.drawable.calendar_bg_selector);
+            dayTextColorResId = a.getResourceId(R.styleable.CalendarPickerView_calendarpicker_dayTextColor, R.color.calendar_text_selector);
+            titleTextStyle = a.getResourceId(R.styleable.CalendarPickerView_calendarpicker_titleTextStyle, R.style.CalendarTitle);
+            headerTextColor = a.getColor(R.styleable.CalendarPickerView_calendarpicker_headerTextColor, ContextCompat.getColor(context, R.color.calendar_text_active));
+            displayHeader = a.getBoolean(R.styleable.CalendarPickerView_calendarpicker_displayHeader, true);
+            displayDayNamesHeaderRow = a.getBoolean(R.styleable.CalendarPickerView_calendarpicker_displayDayNamesHeaderRow, false);
+            displayDayNamesAsCalendarHeader = a.getBoolean(R.styleable.CalendarVertical_calendarvert_displayDayNamesAsCalendarHeader, true);
+            displayAlwaysDigitNumbers = a.getBoolean(R.styleable.CalendarPickerView_calendarpicker_displayAlwaysDigitNumbers, false);
+            autoInit = a.getBoolean(R.styleable.CalendarPickerView_calendarpicker_autoInit, true);
+            initialMode = a.getInt(R.styleable.CalendarVertical_calendarvert_mode, 0);
+            monthsTitleResId = a.getResourceId(R.styleable.CalendarVertical_calendarvert_months_title, 0);
             
-            int dayBackgroundResId = a.getResourceId(R.styleable.CalendarPickerView_calendarpicker_dayBackground, R.drawable.calendar_bg_selector);
-            int dayTextColorResId = a.getResourceId(R.styleable.CalendarPickerView_calendarpicker_dayTextColor, R.color.calendar_text_selector);
-            int titleTextStyle = a.getResourceId(R.styleable.CalendarPickerView_calendarpicker_titleTextStyle, R.style.CalendarTitle);
-            int headerTextColor = a.getColor(R.styleable.CalendarPickerView_calendarpicker_headerTextColor, ContextCompat.getColor(context, R.color.calendar_text_active));
-            boolean displayHeader = a.getBoolean(R.styleable.CalendarPickerView_calendarpicker_displayHeader, true);
-            boolean displayDayNamesHeaderRow = a.getBoolean(R.styleable.CalendarPickerView_calendarpicker_displayDayNamesHeaderRow, false);
-            boolean displayDayNamesAsCalendarHeader = a.getBoolean(R.styleable.CalendarVertical_calendarvert_displayDayNamesAsCalendarHeader, true);
-            boolean displayAlwaysDigitNumbers = a.getBoolean(R.styleable.CalendarPickerView_calendarpicker_displayAlwaysDigitNumbers, false);
-            boolean autoInit = a.getBoolean(R.styleable.CalendarPickerView_calendarpicker_autoInit, true);
-            int initialMode = a.getInt(R.styleable.CalendarVertical_calendarvert_mode, 0);
-            int monthsTitleResId = a.getResourceId(R.styleable.CalendarVertical_calendarvert_months_title, 0);
-            
-            List<String> monthsTitle = new ArrayList<>();
+            monthsTitle.clear();
             if (monthsTitleResId != 0) {
                 Collections.addAll(monthsTitle, getResources().getStringArray(monthsTitleResId));
             }
             
             setupWeekDaysHeader(context, displayDayNamesAsCalendarHeader);
 
-            calendar = new CalendarPickerView(
+            if (autoInit) {
+                calendar = new CalendarPickerView(
+                        this,
+                        context,
+                        attrs,
+                        bg,
+                        dayBackgroundResId,
+                        dayTextColorResId,
+                        titleTextStyle,
+                        displayHeader,
+                        headerTextColor,
+                        displayDayNamesHeaderRow,
+                        displayDayNamesAsCalendarHeader,
+                        displayAlwaysDigitNumbers,
+                        autoInit,
+                        initialMode,
+                        monthsTitle
+                );
+
+                calendarContainer.addView(calendar);
+            }
+        }
+    }
+
+    public void initialize(InitializeCallback initializeCallback) {
+        AsyncLayoutInflater asyncLayoutInflater = new AsyncLayoutInflater(getContext());
+
+        asyncLayoutInflater.inflate(R.layout.calendar, this, (inflatedView, resId, parent) -> {
+            calendar = inflatedView.findViewById(R.id.calendar_picker_view);
+
+            calendar.setup(
                     this,
-                    context,
-                    attrs,
+                    getContext(),
+                    null,
                     bg,
                     dayBackgroundResId,
                     dayTextColorResId,
@@ -72,15 +119,19 @@ public class CalendarVertical extends LinearLayout {
                     displayDayNamesHeaderRow,
                     displayDayNamesAsCalendarHeader,
                     displayAlwaysDigitNumbers,
-                    autoInit,
+                    true,
                     initialMode,
                     monthsTitle
             );
-    
-            view.addView(calendar);
-        }
-    }
+            
+            if (calendarContainer != null) {
+                calendarContainer.addView(calendar);
+            }
 
+            initializeCallback.onInitialize(calendar);
+        });
+    }
+    
     /**
      * Return CalendarPickerView fluent initializer instance (builder)
      */
@@ -161,5 +212,9 @@ public class CalendarVertical extends LinearLayout {
         }
 
         return dayOfWeek;
+    }
+    
+    public interface InitializeCallback {
+        void onInitialize(CalendarPickerView calendar);
     }
 }
