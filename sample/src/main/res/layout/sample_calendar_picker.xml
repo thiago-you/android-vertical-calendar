@@ -3,6 +3,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <HorizontalScrollView
@@ -114,6 +115,7 @@
         android:paddingRight="8dp"
         android:background="#FFFFFF"
         android:clipToPadding="false"
+        app:calendarvert_autoInit="false"
         android:scrollbarStyle="outsideOverlay" />
     
     <Button

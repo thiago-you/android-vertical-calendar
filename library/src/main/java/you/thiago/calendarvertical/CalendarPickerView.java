@@ -148,7 +148,7 @@ public class CalendarPickerView extends ListView {
             displayDayNamesHeaderRow = a.getBoolean(R.styleable.CalendarPickerView_calendarpicker_displayDayNamesHeaderRow, true);
             displayDayNamesAsCalendarHeader = a.getBoolean(R.styleable.CalendarPickerView_calendarpicker_displayDayNamesAsCalendarHeader, false);
             displayAlwaysDigitNumbers = a.getBoolean(R.styleable.CalendarPickerView_calendarpicker_displayAlwaysDigitNumbers, false);
-            autoInit = a.getBoolean(R.styleable.CalendarPickerView_calendarpicker_autoInit, true);
+            autoInit = a.getBoolean(R.styleable.CalendarPickerView_calendarpicker_autoInit, false);
             initialMode = a.getInt(R.styleable.CalendarPickerView_calendarpicker_mode, 0);
 
             int monthsTitleResId = a.getResourceId(R.styleable.CalendarVertical_calendarvert_months_title, 0);
@@ -188,6 +188,28 @@ public class CalendarPickerView extends ListView {
 
         adapter = new MonthAdapter();
 
+        setupView(context, bg);
+    }
+
+    public void setup(
+            CalendarVertical calendarVertical, Context context, AttributeSet attrs, int bg, int dayBackgroundResId,
+            int dayTextColorResId, int titleTextStyle, boolean displayHeader, int headerTextColor,
+            boolean displayDayNamesHeaderRow, boolean displayDayNamesAsCalendarHeader,
+            boolean displayAlwaysDigitNumbers, boolean autoInit, int initialMode, List<String> monthsTitle
+    ) {
+        this.calendarVertical = calendarVertical;
+        this.dayBackgroundResId = dayBackgroundResId;
+        this.dayTextColorResId = dayTextColorResId;
+        this.titleTextStyle = titleTextStyle;
+        this.displayHeader = displayHeader;
+        this.headerTextColor = headerTextColor;
+        this.displayDayNamesHeaderRow = displayDayNamesHeaderRow;
+        this.displayDayNamesAsCalendarHeader = displayDayNamesAsCalendarHeader;
+        this.displayAlwaysDigitNumbers = displayAlwaysDigitNumbers;
+        this.autoInit = autoInit;
+        this.initialMode = initialMode;
+        this.monthsTitle = monthsTitle;
+        
         setupView(context, bg);
     }
     

@@ -47,21 +47,22 @@ public class SampleCalendarVertActivity extends Activity {
         final Calendar lastYear = Calendar.getInstance();
         lastYear.add(Calendar.YEAR, -1);
 
-        calendar = ((CalendarVertical) findViewById(R.id.calendar_vertical)).getInstance();
-
-        Calendar today = Calendar.getInstance();
-        ArrayList<Date> dates = new ArrayList<>();
-        
-        today.add(Calendar.DATE, 3);
-        dates.add(today.getTime());
-        
-        today.add(Calendar.DATE, 5);
-        dates.add(today.getTime());
-        
-        calendar.build()
-                .withSelectedDates(dates);
-
-        initButtonListeners(nextYear, lastYear);
+        ((CalendarVertical) findViewById(R.id.calendar_vertical)).initialize(instance -> {
+            calendar = instance;
+    
+            Calendar today = Calendar.getInstance();
+            ArrayList<Date> dates = new ArrayList<>();
+            
+            today.add(Calendar.DATE, 3);
+            dates.add(today.getTime());
+            
+            today.add(Calendar.DATE, 5);
+            dates.add(today.getTime());
+            
+            calendar.build().withSelectedDates(dates);
+    
+            initButtonListeners(nextYear, lastYear);
+        });
     }
 
     private void initButtonListeners(final Calendar nextYear, final Calendar lastYear) {
