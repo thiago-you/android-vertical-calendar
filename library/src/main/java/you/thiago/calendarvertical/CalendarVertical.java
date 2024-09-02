@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -93,6 +95,23 @@ public class CalendarVertical extends LinearLayout {
         return calendar.build();
     }
 
+    /**
+     * Return selected range dates (start and end date)
+     * @return SelectedRange
+     */
+    @NotNull
+    public CalendarPickerView.SelectedRange getSelectedRange() {
+        return calendar.getSelectedRange();
+    }
+
+    public void setOnDateSelectedListener(CalendarPickerView.OnDateSelectedListener listener) {
+        calendar.setOnDateSelectedListener(listener);
+    }
+
+    public void setOnRangeSelectionListener(CalendarPickerView.OnRangeDateSelectedListener listener) {
+        calendar.setOnRangeSelectionListener(listener);
+    }
+    
     public void setWeekDaysNames(List<String> weekDaysNames) {
         if (weekDaysNames.size() != 7) {
             throw new IllegalArgumentException("Week days names must have 7 elements");

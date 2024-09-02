@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.text.DateFormat;
 import java.text.DateFormatSymbols;
 import java.text.SimpleDateFormat;
@@ -26,6 +28,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import static java.util.Calendar.DATE;
@@ -105,6 +108,7 @@ public class CalendarPickerView extends ListView {
     private List<String> monthsTitle;
 
     private OnDateSelectedListener dateListener;
+    private OnRangeDateSelectedListener rangeDateListener;
     private DateSelectableFilter dateConfiguredListener;
     private OnInvalidDateSelectedListener invalidDateListener =
             new DefaultOnInvalidDateSelectedListener();
@@ -217,6 +221,25 @@ public class CalendarPickerView extends ListView {
         }
     }
 
+    /**
+     * Return selected range dates (start and end date)
+     * @return SelectedRange
+     */
+    @NotNull
+    public SelectedRange getSelectedRange() {
+        Date date1 = null;
+        Date date2 = null;
+
+        if (!selectedCals.isEmpty()) {
+            date1 = selectedCals.get(0).getTime();
+        }
+        if (selectedCals.size() > 1) {
+            date2 = selectedCals.get(1).getTime();
+        }
+        
+        return new SelectedRange(date1, date2);
+    }
+    
     /**
      * Return CalendarPickerView fluent initializer instance (builder)
      */
@@ -662,6 +685,19 @@ public class CalendarPickerView extends ListView {
                     } else {
                         dateListener.onDateUnselected(clickedDate);
                     }
+                }
+                if (rangeDateListener != null) {
+                    Date date1 = null;
+                    Date date2 = null;
+                    
+                    if (!selectedCals.isEmpty()) {
+                        date1 = selectedCals.get(0).getTime();
+                    }
+                    if (selectedCals.size() > 1) {
+                        date2 = selectedCals.get(1).getTime();
+                    }
+                    
+                    rangeDateListener.onRangeSelected(date1, date2);
                 }
             }
         }
@@ -1137,6 +1173,10 @@ public class CalendarPickerView extends ListView {
         dateListener = listener;
     }
 
+    public void setOnRangeSelectionListener(OnRangeDateSelectedListener listener) {
+        rangeDateListener = listener;
+    }
+
     /**
      * Set a listener to react to user selection of a disabled date.
      *
@@ -1190,6 +1230,17 @@ public class CalendarPickerView extends ListView {
     }
 
     /**
+     * Interface to be notified when a new date range is selected. This will only be called
+     * when the user initiates the date selection.  If you call {@link #selectDate(Date)} this
+     * listener will not be notified.
+     *
+     * @see #setOnRangeSelectionListener(OnRangeDateSelectedListener)
+     */
+    public interface OnRangeDateSelectedListener {
+        void onRangeSelected(Date date1, Date date2);
+    }
+
+    /**
      * Interface to be notified when an invalid date is selected by the user. This will only be
      * called when the user initiates the date selection. If you call {@link #selectDate(Date)} this
      * listener will not be notified.
@@ -1226,6 +1277,29 @@ public class CalendarPickerView extends ListView {
         @Override
         public void onInvalidDateSelected(Date date) {
             // No default behavior. Nothing happens.
+        }
+    }
+    
+    public static class SelectedRange {
+        @Nullable
+        private Date dateStart;
+        
+        @Nullable
+        private Date dateEnd;
+        
+        public SelectedRange(@Nullable Date dateStart, @Nullable Date dateEnd) {
+            this.dateStart = dateStart;
+            this.dateEnd = dateEnd;
+        }
+       
+        @Nullable
+        public Date getDateStart() {
+            return dateStart;
+        }
+        
+        @Nullable
+        public Date getDateEnd() {
+            return dateEnd;
         }
     }
 }
