@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/img_calendar_preview"
+        android:visibility="gone"
+        tools:ignore="ContentDescription"
+        tools:visibility="visible" />
 
     <include
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/calendar_week_header_padding"
-        layout="@layout/week_days_header" />
+        layout="@layout/week_days_header"
+        tools:visibility="gone" />
 
     <!-- This is the place where the CalendarPicker is added -->
 
