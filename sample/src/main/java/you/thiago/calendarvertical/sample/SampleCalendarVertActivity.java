@@ -60,7 +60,7 @@ public class SampleCalendarVertActivity extends Activity {
             dates.add(today.getTime());
             
             calendar.build().withSelectedDates(dates);
-    
+
             initButtonListeners(nextYear, lastYear);
         });
     }
