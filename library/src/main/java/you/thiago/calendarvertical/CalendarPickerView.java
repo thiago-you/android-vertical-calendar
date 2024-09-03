@@ -117,6 +117,7 @@ public class CalendarPickerView extends ListView {
     private DayViewAdapter dayViewAdapter = new DefaultDayViewAdapter();
 
     private boolean monthsReverseOrder;
+    private boolean isSelectingNext = false;
 
     private final StringBuilder monthBuilder = new StringBuilder(50);
     private Formatter monthFormatter;
@@ -464,6 +465,15 @@ public class CalendarPickerView extends ListView {
          * Set an initially-selected date.  The calendar will scroll to that date if it's not already
          * visible.
          */
+        public FluentInitializer withSelectedDate(Date selectedDates, boolean selectingNext) {
+            isSelectingNext = selectingNext;
+            return withSelectedDates(Collections.singletonList(selectedDates));
+        }
+
+        /**
+         * Set an initially-selected date.  The calendar will scroll to that date if it's not already
+         * visible.
+         */
         public FluentInitializer setWeekDaysHeader(List<String> weekDays) {
             if (calendarVertical != null) {
                 calendarVertical.setWeekDaysNames(weekDays);
@@ -472,6 +482,11 @@ public class CalendarPickerView extends ListView {
             return this;
         }
 
+        public FluentInitializer setSelectionToLastRangeDate(boolean state) {
+            isSelectingNext = state;
+            return this;
+        }
+        
         /**
          * Set multiple selected dates.  This will throw an {@link IllegalArgumentException} if you
          * pass in multiple dates and haven't already called {@link #inMode(SelectionMode)}.
@@ -839,12 +854,24 @@ public class CalendarPickerView extends ListView {
 
         switch (selectionMode) {
             case RANGE:
+                if (selectedCals.size() <= 1) {
+                    isSelectingNext = false;
+                }
+
                 if (selectedCals.size() > 1) {
+                    MonthCellDescriptor cell1 = selectedCells.get(0);
+                    Calendar cal1 = selectedCals.get(0);
+                    
                     // We've already got a range selected: clear the old one.
                     clearOldSelections();
-                } else if (selectedCals.size() == 1 && newlySelectedCal.before(selectedCals.get(0))) {
-                    // We're moving the start of the range back in time: clear the old start date.
-                    clearOldSelections();
+                    
+                    if (isSelectingNext) {
+                        isSelectingNext = false;
+                        cell1.setSelected(true);
+
+                        selectedCells.add(cell1);
+                        selectedCals.add(cal1);
+                    }
                 }
                 break;
 
@@ -861,12 +888,23 @@ public class CalendarPickerView extends ListView {
 
         if (date != null) {
             // Select a new cell.
-            if (selectedCells.size() == 0 || !selectedCells.get(0).equals(cell)) {
-                selectedCells.add(cell);
-                cell.setSelected(true);
+            if (selectedCals.size() == 1 && newlySelectedCal.before(selectedCals.get(0))) {
+                // We're moving the start of the range back in time: set next date as first date range
+                if (selectedCells.isEmpty() || !selectedCells.get(0).equals(cell)) {
+                    selectedCells.add(0, cell);
+                    cell.setSelected(true);
+                }
+                
+                selectedCals.add(0, newlySelectedCal);
+            } else {
+                if (selectedCells.isEmpty() || !selectedCells.get(0).equals(cell)) {
+                    selectedCells.add(cell);
+                    cell.setSelected(true);
+                }
+                
+                selectedCals.add(newlySelectedCal);
             }
-            selectedCals.add(newlySelectedCal);
-
+            
             if (selectionMode == SelectionMode.RANGE && selectedCells.size() > 1) {
                 // Select all days in between start and end.
                 Date start = selectedCells.get(0).getDate();
