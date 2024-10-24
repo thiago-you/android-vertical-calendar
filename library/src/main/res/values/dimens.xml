@@ -7,6 +7,6 @@
   <dimen name="calendar_bottom_margin">32dp</dimen>
   <dimen name="calendar_bottom_separator">8dp</dimen>
   <dimen name="calendar_month_title_padding">12dp</dimen>
-  <dimen name="calendar_week_header_padding">24dp</dimen>
+  <dimen name="calendar_week_header_padding">8dp</dimen>
   <dimen name="calendar_horizontal_padding">16dp</dimen>
 </resources>
