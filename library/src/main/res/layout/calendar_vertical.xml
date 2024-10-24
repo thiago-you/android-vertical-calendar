@@ -17,6 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/calendar_week_header_padding"
+        android:layout_marginHorizontal="@dimen/calendar_horizontal_padding"
         layout="@layout/week_days_header"
         tools:visibility="gone" />
 

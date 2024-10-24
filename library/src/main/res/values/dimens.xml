@@ -2,9 +2,11 @@
   <dimen name="calendar_day_headers_padding">4dp</dimen>
   <dimen name="calendar_month_top_margin">16dp</dimen>
   <dimen name="calendar_month_title_bottom_margin">4dp</dimen>
-  <dimen name="calendar_text_medium">18sp</dimen>
-  <dimen name="calendar_text_small">14sp</dimen>
-  <dimen name="calendar_top_padding">32dp</dimen>
-  <dimen name="calendar_month_title_padding">24dp</dimen>
-  <dimen name="calendar_week_header_padding">24dp</dimen>
+  <dimen name="calendar_text_medium">14sp</dimen>
+  <dimen name="calendar_text_small">12sp</dimen>
+  <dimen name="calendar_bottom_margin">32dp</dimen>
+  <dimen name="calendar_bottom_separator">8dp</dimen>
+  <dimen name="calendar_month_title_padding">12dp</dimen>
+  <dimen name="calendar_week_header_padding">8dp</dimen>
+  <dimen name="calendar_horizontal_padding">16dp</dimen>
 </resources>

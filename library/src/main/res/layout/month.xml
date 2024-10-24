@@ -2,31 +2,43 @@
 <you.thiago.calendarvertical.MonthView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="@dimen/calendar_top_padding"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/calendar_month_title_padding">
 
     <!-- This is the place where the month title is added -->
 
-    <you.thiago.calendarvertical.CalendarGridView
-        android:id="@+id/calendar_grid"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/calendar_month_title_padding">
-
-        <include layout="@layout/week_days_header" />
-
-        <include layout="@layout/week" />
-
-        <include layout="@layout/week" />
-
-        <include layout="@layout/week" />
-
-        <include layout="@layout/week" />
-
-        <include layout="@layout/week" />
-
-        <include layout="@layout/week" />
-
-    </you.thiago.calendarvertical.CalendarGridView>
+        android:layout_marginHorizontal="@dimen/calendar_horizontal_padding">
+        
+        <you.thiago.calendarvertical.CalendarGridView
+            android:id="@+id/calendar_grid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+    
+            <include layout="@layout/week_days_header" />
+    
+            <include layout="@layout/week" />
+    
+            <include layout="@layout/week" />
+    
+            <include layout="@layout/week" />
+    
+            <include layout="@layout/week" />
+    
+            <include layout="@layout/week" />
+    
+            <include layout="@layout/week" />
+    
+        </you.thiago.calendarvertical.CalendarGridView>
+        
+    </LinearLayout>
+    
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/calendar_bottom_separator"
+        android:layout_marginTop="@dimen/calendar_bottom_margin"
+        android:background="@color/calendar_bottom_separator"/>
 
 </you.thiago.calendarvertical.MonthView>

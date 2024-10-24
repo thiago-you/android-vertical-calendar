@@ -111,8 +111,6 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:paddingBottom="8dp"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
         android:background="#FFFFFF"
         android:clipToPadding="false"
         app:calendarvert_autoInit="false"
